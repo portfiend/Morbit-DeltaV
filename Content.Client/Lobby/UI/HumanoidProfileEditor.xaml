@@ -61,6 +61,14 @@
                                                    ToolTip="{Loc 'humanoid-profile-editor-guidebook-button-tooltip'}"/>
                                     <OptionButton Name="SpeciesButton" HorizontalAlignment="Right" />
                                 </BoxContainer>
+
+                                <!-- Morbit: Add sub-species -->
+                                <BoxContainer Name="SubSpeciesPicker" HorizontalExpand="True">
+                                    <Label Text="{Loc 'humanoid-profile-editor-subspecies-label'}" />
+                                    <Control HorizontalExpand="True"/>
+                                    <OptionButton Name="SubSpeciesButton" HorizontalAlignment="Right" />
+                                </BoxContainer>
+
                                 <!-- Age -->
                                 <BoxContainer HorizontalExpand="True">
                                     <Label Text="{Loc 'humanoid-profile-editor-age-label'}" />

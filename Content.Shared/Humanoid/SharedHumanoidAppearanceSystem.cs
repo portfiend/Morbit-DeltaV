@@ -466,7 +466,17 @@ public abstract class SharedHumanoidAppearanceSystem : EntitySystem
     {
         if (_proto.TryIndex<SpeciesPrototype>(speciesId, out var species))
         {
-            return Loc.GetString(species.Name);
+            // Morbit: Support sub-species
+            var speciesName = Loc.GetString(species.Name) ?? string.Empty;
+            var subspeciesName = species.SubspeciesName is not null
+                ? Loc.GetString(species.SubspeciesName)
+                : string.Empty;
+
+            return Loc.GetString("species-representation-result",
+                ("subspecies", subspeciesName),
+                ("species", speciesName))
+                .Trim();
+            // End Morbit
         }
 
         Log.Error("Tried to get representation of unknown species: {speciesId}");

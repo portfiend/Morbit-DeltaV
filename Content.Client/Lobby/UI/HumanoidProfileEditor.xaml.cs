@@ -86,6 +86,10 @@ namespace Content.Client.Lobby.UI
 
         private List<SpeciesPrototype> _species = new();
 
+        // Morbit: Subspecies and master species dropdowns
+        private List<SpeciesPrototype> _masterSpecies = new();
+        private List<SpeciesPrototype> _subSpecies = new();
+
         private List<(string, RequirementsSelector)> _jobPriorities = new();
 
         private readonly Dictionary<string, BoxContainer> _jobCategories;
@@ -215,9 +219,15 @@ namespace Content.Client.Lobby.UI
             SpeciesButton.OnItemSelected += args =>
             {
                 SpeciesButton.SelectId(args.Id);
-                SetSpecies(_species[args.Id].ID);
-                UpdateHairPickers();
-                OnSkinColorOnValueChanged();
+                SetSpecies(_masterSpecies[args.Id].ID);
+                UpdateSubspeciesList();
+            };
+
+            // Morbit: Add subspecies button
+            SubSpeciesButton.OnItemSelected += args =>
+            {
+                SubSpeciesButton.SelectId(args.Id);
+                SetSpecies(_subSpecies[args.Id].ID);
             };
 
             #region Skin
@@ -440,6 +450,10 @@ namespace Content.Client.Lobby.UI
             SpeciesInfoButton.OnPressed += OnSpeciesInfoButtonPressed;
 
             UpdateSpeciesGuidebookIcon();
+
+            // Morbit: Do this at the end, so jobs initiate first!
+            UpdateSubspeciesList();
+
             IsDirty = false;
         }
 
@@ -595,14 +609,16 @@ namespace Content.Client.Lobby.UI
             _species.Clear();
 
             _species.AddRange(_prototypeManager.EnumeratePrototypes<SpeciesPrototype>().Where(o => o.RoundStart));
-            var speciesIds = _species.Select(o => o.ID).ToList();
+            _masterSpecies = _species.Where(o => o.MasterSpecies == null).ToList();
 
-            for (var i = 0; i < _species.Count; i++)
+            var speciesIds = _masterSpecies.Select(o => o.ID).ToList();
+
+            for (var i = 0; i < _masterSpecies.Count; i++)
             {
-                var name = Loc.GetString(_species[i].Name);
+                var name = Loc.GetString(_masterSpecies[i].Name);
                 SpeciesButton.AddItem(name, i);
 
-                if (Profile?.Species.Equals(_species[i].ID) == true)
+                if (Profile?.Species.Equals(_masterSpecies[i].ID) == true)
                 {
                     SpeciesButton.SelectId(i);
                 }
@@ -758,6 +774,7 @@ namespace Content.Client.Lobby.UI
             RefreshJobs();
             RefreshLoadouts();
             RefreshSpecies();
+            UpdateSubspeciesList(); // Morbit
             RefreshTraits();
             RefreshFlavorText();
             ReloadPreview();
@@ -1211,6 +1228,9 @@ namespace Content.Client.Lobby.UI
             UpdateSpeciesGuidebookIcon();
             SetDirty();
             ReloadPreview();
+            // Morbit: Moving these so, updating subspecies calls it too
+            UpdateHairPickers();
+            OnSkinColorOnValueChanged();
         }
 
         private void SetName(string newName)
@@ -1641,6 +1661,36 @@ namespace Content.Client.Lobby.UI
             _exporting = false;
             ImportButton.Disabled = false;
             ExportButton.Disabled = false;
+        }
+
+        // Morbit: Subspecies selector
+        private void UpdateSubspeciesList()
+        {
+            var masterSpecies = Profile?.Species;
+
+            _subSpecies = _species
+                .Where(o => o.MasterSpecies == masterSpecies || o.ID == masterSpecies)
+                .ToList();
+
+            // Remove all current subspecies
+            for (var i = SubSpeciesButton.ItemCount - 1; i >= 0; i--)
+                SubSpeciesButton.RemoveItem(i);
+
+            // Add new subspecies
+            for (var i = 0; i < _subSpecies.Count; i++)
+            {
+                var subspecies = _subSpecies[i];
+                var name = subspecies.SubspeciesName ?? subspecies.Name;
+                SubSpeciesButton.AddItem(Loc.GetString(name), i);
+            }
+
+            // Hide subspecies picker if there's only one option
+            SubSpeciesPicker.Visible = SubSpeciesButton.ItemCount > 1;
+            if (SubSpeciesButton.ItemCount > 0)
+            {
+                SubSpeciesButton.SelectId(0);
+                SetSpecies(_subSpecies[0].ID);
+            }
         }
     }
 }
