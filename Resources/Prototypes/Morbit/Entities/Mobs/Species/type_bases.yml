@@ -1,0 +1,86 @@
+# TCPs get 8 health per "level".
+# Order goes: 
+# CRITICAL (0), SUFFERING (1), HURTING (2), POOR (3), 
+# OKAY (4), GOOD (5), GREAT (6), FANTASTIC (7), PERFECT (8)
+# Thus, max health a TCP type can have is 64.
+# All types get 48 extra "crit" health.
+
+- type: entity
+  abstract: true
+  id: MobTCPBaseHealthPerfect
+  components:
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      64: Critical
+      112: Dead
+
+- type: entity
+  abstract: true
+  id: MobTCPBaseHealthFantastic
+  components:
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      56: Critical
+      104: Dead
+
+- type: entity
+  abstract: true
+  id: MobTCPBaseHealthGreat
+  components:
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      48: Critical
+      96: Dead
+
+- type: entity
+  abstract: true
+  id: MobTCPBaseHealthGood
+  components:
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      40: Critical
+      88: Dead
+
+- type: entity
+  abstract: true
+  id: MobTCPBaseHealthOkay
+  components:
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      32: Critical
+      80: Dead
+
+- type: entity
+  abstract: true
+  id: MobTCPBaseHealthPoor
+  components:
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      24: Critical
+      72: Dead
+
+- type: entity
+  abstract: true
+  id: MobTCPBaseHealthHurting
+  components:
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      16: Critical
+      64: Dead
+
+- type: entity
+  abstract: true
+  id: MobTCPBaseHealthSuffering
+  components:
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      8: Critical
+      56: Dead

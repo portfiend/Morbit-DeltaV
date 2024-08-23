@@ -1,7 +1,9 @@
 - type: entity
   save: false
   name: Urist McTCP
-  parent: BaseMobSpeciesOrganic
+  parent:
+  - BaseMobSpeciesOrganicNoRespirator
+  - MobTCPBaseHealthGreat
   id: BaseMobTCP
   abstract: true
   components:
