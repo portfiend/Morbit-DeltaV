@@ -1,10 +1,11 @@
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.Array;
 
 namespace Content.Shared.Humanoid.Prototypes;
 
 [Prototype("species")]
-public sealed partial class SpeciesPrototype : IPrototype
+public sealed partial class SpeciesPrototype : IPrototype, IInheritingPrototype
 {
     /// <summary>
     /// Prototype ID of the species.
@@ -120,6 +121,28 @@ public sealed partial class SpeciesPrototype : IPrototype
     /// </summary>
     [DataField]
     public int MaxAge = 120;
+
+    /// <summary>
+    ///     Morbit: Marks this species as a "sub-species".
+    /// </summary>
+    [DataField]
+    public ProtoId<SpeciesPrototype>? MasterSpecies = null;
+
+    /// <summary>
+    ///     Morbit: Gives this a different name in the sub-species drop-down list.
+    /// </summary>
+    [DataField]
+    public LocId? SubspeciesName = null;
+
+    // Morbit: Make inheritable
+    /// <inheritdoc />
+    [ParentDataField(typeof(AbstractPrototypeIdArraySerializer<SpeciesPrototype>))]
+    public string[]? Parents { get; }
+
+    /// <inheritdoc />
+    [NeverPushInheritance]
+    [AbstractDataField]
+    public bool Abstract { get; }
 }
 
 public enum SpeciesNaming : byte
