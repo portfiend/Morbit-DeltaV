@@ -1,10 +1,12 @@
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.Array;
 using Robust.Shared.Utility;
 
 namespace Content.Shared.Humanoid.Markings
 {
+    // Morbit: Make prototype heritable
     [Prototype("marking")]
-    public sealed partial class MarkingPrototype : IPrototype
+    public sealed partial class MarkingPrototype : IPrototype, IInheritingPrototype
     {
         [IdDataField]
         public string ID { get; private set; } = "uwu";
@@ -34,6 +36,17 @@ namespace Content.Shared.Humanoid.Markings
 
         [DataField("sprites", required: true)]
         public List<SpriteSpecifier> Sprites { get; private set; } = default!;
+
+        // Morbit: Make prototype inheritable
+        /// <inheritdoc />
+        [ParentDataField(typeof(AbstractPrototypeIdArraySerializer<MarkingPrototype>))]
+        public string[]? Parents { get; }
+
+        /// <inheritdoc />
+        [NeverPushInheritance]
+        [AbstractDataField]
+        public bool Abstract { get; }
+        // End Morbit
 
         public Marking AsMarking()
         {

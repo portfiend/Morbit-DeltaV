@@ -32,11 +32,6 @@
     requiredLegs: 2
   - type: Inventory
     speciesId: tcp
-  - type: LanguageKnowledge
-    speaks:
-    - GalacticCommon
-    understands:
-    - GalacticCommon
 
 - type: entity
   parent: BaseSpeciesDummy

@@ -11,14 +11,6 @@
   maleFirstNames: names_tcp_male
   femaleFirstNames: names_tcp_female
   naming: FirstDashFirst
-  minHeight: 0.3
-  defaultHeight: 0.45
-  maxHeight: 0.9
-  averageHeight: 33.3
-  minWidth: 0.3
-  defaultWidth: 0.45
-  maxWidth: 0.9
-  averageWidth: 14.2
   sexes:
   - Unsexed
 
