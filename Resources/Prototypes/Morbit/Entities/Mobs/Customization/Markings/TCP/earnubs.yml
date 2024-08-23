@@ -1,0 +1,13 @@
+- type: marking
+  abstract: true
+  id: TCPEarnubsBase
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [ TinyCatPerson ]
+  sprites:
+  - sprite: Morbit/Mobs/Customization/TCP/earnubs.rsi
+    state: basic
+
+- type: marking
+  parent: TCPEarnubsBase
+  id: TCPEarnubsBasic

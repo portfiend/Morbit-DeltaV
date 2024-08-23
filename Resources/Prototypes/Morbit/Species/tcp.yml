@@ -19,6 +19,8 @@
   defaultWidth: 0.45
   maxWidth: 0.9
   averageWidth: 14.2
+  sexes:
+  - Unsexed
 
 - type: speciesBaseSprites
   id: MobTCPSprites
@@ -55,9 +57,11 @@
     Snout:
       points: 1
       required: false
+    # we are using HeadTop for earnubs!
     HeadTop:
       points: 1
-      required: false
+      required: true
+      defaultMarkings: [ TCPEarnubsBasic ]
     HeadSide:
       points: 1
       required: false
@@ -75,37 +79,37 @@
   id: MobTCPHead
   baseSprite:
     sprite: Morbit/Mobs/Species/TCP/parts.rsi
-    state: head_m
+    state: head
 
 - type: humanoidBaseSprite
   id: MobTCPHeadMale
   baseSprite:
     sprite: Morbit/Mobs/Species/TCP/parts.rsi
-    state: head_m
+    state: head
 
 - type: humanoidBaseSprite
   id: MobTCPHeadFemale
   baseSprite:
     sprite: Morbit/Mobs/Species/TCP/parts.rsi
-    state: head_f
+    state: head
 
 - type: humanoidBaseSprite
   id: MobTCPTorso
   baseSprite:
     sprite: Morbit/Mobs/Species/TCP/parts.rsi
-    state: torso_m
+    state: torso
 
 - type: humanoidBaseSprite
   id: MobTCPTorsoMale
   baseSprite:
     sprite: Morbit/Mobs/Species/TCP/parts.rsi
-    state: torso_m
+    state: torso
 
 - type: humanoidBaseSprite
   id: MobTCPTorsoFemale
   baseSprite:
     sprite: Morbit/Mobs/Species/TCP/parts.rsi
-    state: torso_f
+    state: torso
 
 - type: humanoidBaseSprite
   id: MobTCPLLeg
