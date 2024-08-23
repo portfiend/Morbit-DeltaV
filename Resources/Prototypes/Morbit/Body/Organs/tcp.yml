@@ -1,0 +1,40 @@
+- type: entity
+  id: OrganTCPSlimeCore
+  parent: BaseItem
+  noSpawn: true
+  components:
+  - type: Organ
+  - type: Gibbable
+  - type: Sprite
+    sprite: Mobs/Species/Human/organs.rsi
+    state: stomach
+  - type: StaticPrice
+    price: 50
+  - type: Stomach
+    specialDigestible:
+      tags:
+      - TCPFood
+  - type: SolutionContainerManager
+    solutions:
+      stomach:
+        maxVol: 20
+  - type: Metabolizer
+    removeEmpty: true
+    maxReagents: 4
+    metabolizerTypes: [ TCP ]
+    groups:
+    - id: Medicine
+    - id: Narcotic
+    - id: Poison
+    - id: Food
+    - id: Drink
+    - id: Alcohol
+      rateModifier: 0.1
+    - id: Gas
+  - type: Input
+    context: "ghost"
+  - type: Brain
+  - type: InputMover
+  - type: Examiner
+  - type: BlockMovement
+  - type: BadFood

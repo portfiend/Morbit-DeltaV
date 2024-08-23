@@ -14,6 +14,8 @@
       - left arm
       - right leg
       - left leg
+      organs:
+        core: OrganTCPSlimeCore
     right arm:
       part: RightArmTCP
       connections:
