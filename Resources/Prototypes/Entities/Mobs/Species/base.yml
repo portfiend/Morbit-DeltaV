@@ -143,7 +143,6 @@
   - type: IdExaminable
   - type: Hands
   - type: ComplexInteraction
-  - type: Internals
   - type: FloatingVisuals
   - type: Climbing
   - type: Cuffable
@@ -219,11 +218,11 @@
   save: false
   parent:
   - MobBloodstream
-  - MobRespirator
   - MobAtmosStandard
   - MobFlammable
   - BaseMobSpecies
-  id: BaseMobSpeciesOrganic
+  # Morbit: Create non-breathing species for TCPs
+  id: BaseMobSpeciesOrganicNoRespirator
   abstract: true
   components:
   - type: Barotrauma
@@ -273,13 +272,6 @@
     spawned:
       - id: FoodMeat
         amount: 5
-  - type: Respirator
-    damage:
-      types:
-        Asphyxiation: 1.0
-    damageRecovery:
-      types:
-        Asphyxiation: -1.0
   - type: FireVisuals
     alternateState: Standing
 
@@ -346,3 +338,21 @@
     interfaces:
       enum.HumanoidMarkingModifierKey.Key: # sure, this can go here too
         type: HumanoidMarkingModifierBoundUserInterface
+
+# Morbit: Create non-breathing species for TCPs
+- type: entity
+  save: false
+  parent:
+  - BaseMobSpeciesOrganicNoRespirator
+  - MobRespirator
+  id: BaseMobSpeciesOrganic
+  abstract: true
+  components:
+  - type: Respirator
+    damage:
+      types:
+        Asphyxiation: 1.0
+    damageRecovery:
+      types:
+        Asphyxiation: -1.0
+  - type: Internals
