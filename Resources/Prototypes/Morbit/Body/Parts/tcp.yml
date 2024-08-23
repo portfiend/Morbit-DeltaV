@@ -1,0 +1,117 @@
+- type: entity
+  id: PartTCP
+  parent: [BaseItem, BasePart]
+  name: "TCP body part"
+  abstract: true
+  components:
+  - type: Extractable
+    juiceSolution:
+      reagents:
+      - ReagentId: Fat
+        Quantity: 3
+      - ReagentId: Blood
+        Quantity: 10
+
+- type: entity
+  id: TorsoTCP
+  name: "TCP torso"
+  parent: [PartTCP, BaseTorso]
+  components:
+  - type: Sprite
+    sprite: Mobs/Species/TCP/parts.rsi
+    state: "torso_m"
+  - type: Extractable
+    juiceSolution:
+      reagents:
+      - ReagentId: Fat
+        Quantity: 10
+      - ReagentId: Blood
+        Quantity: 20
+
+- type: entity
+  id: HeadTCP
+  name: "TCP head"
+  parent: [PartTCP, BaseHead]
+  components:
+  - type: Sprite
+    sprite: Mobs/Species/TCP/parts.rsi
+    state: "head_m"
+  - type: Extractable
+    juiceSolution:
+      reagents:
+      - ReagentId: Fat
+        Quantity: 5
+      - ReagentId: Blood
+        Quantity: 10
+
+- type: entity
+  id: LeftArmTCP
+  name: "left TCP arm"
+  parent: [PartTCP, BaseLeftArm]
+  components:
+  - type: Sprite
+    sprite: Mobs/Species/TCP/parts.rsi
+    state: "l_arm"
+
+- type: entity
+  id: RightArmTCP
+  name: "right TCP arm"
+  parent: [PartTCP, BaseRightArm]
+  components:
+  - type: Sprite
+    sprite: Mobs/Species/TCP/parts.rsi
+    state: "r_arm"
+
+- type: entity
+  id: LeftHandTCP
+  name: "left TCP hand"
+  parent: [PartTCP, BaseLeftHand]
+  components:
+  - type: Sprite
+    sprite: Mobs/Species/TCP/parts.rsi
+    state: "l_hand"
+
+- type: entity
+  id: RightHandTCP
+  name: "right TCP hand"
+  parent: [PartTCP, BaseRightHand]
+  components:
+  - type: Sprite
+    sprite: Mobs/Species/TCP/parts.rsi
+    state: "r_hand"
+
+- type: entity
+  id: LeftLegTCP
+  name: "left TCP leg"
+  parent: [PartTCP, BaseLeftLeg]
+  components:
+  - type: Sprite
+    sprite: Mobs/Species/TCP/parts.rsi
+    state: "l_leg"
+
+- type: entity
+  id: RightLegTCP
+  name: "right TCP leg"
+  parent: [PartTCP, BaseRightLeg]
+  components:
+  - type: Sprite
+    sprite: Mobs/Species/TCP/parts.rsi
+    state: "r_leg"
+
+- type: entity
+  id: LeftFootTCP
+  name: "left TCP foot"
+  parent: [PartTCP, BaseLeftFoot]
+  components:
+  - type: Sprite
+    sprite: Mobs/Species/TCP/parts.rsi
+    state: "l_foot"
+
+- type: entity
+  id: RightFootTCP
+  name: "right TCP foot"
+  parent: [PartTCP, BaseRightFoot]
+  components:
+  - type: Sprite
+    sprite: Mobs/Species/TCP/parts.rsi
+    state: "r_foot"

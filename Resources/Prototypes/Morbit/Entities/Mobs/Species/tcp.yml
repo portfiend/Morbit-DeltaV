@@ -1,0 +1,46 @@
+- type: entity
+  save: false
+  name: Urist McTCP
+  parent: BaseMobSpeciesOrganic
+  id: BaseMobTCP
+  abstract: true
+  components:
+  - type: HumanoidAppearance
+    species: TinyCatPerson
+  - type: Puller
+    needsHands: false
+  - type: Carriable # Carrying system from nyanotrasen.
+  - type: Icon
+    sprite: Morbit/Mobs/Species/TCP/parts.rsi
+    state: full
+  - type: Fixtures
+    fixtures: # TODO: This needs a second fixture just for mob collisions.
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.35
+        density: 60
+        restitution: 0.0
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+  - type: Body
+    prototype: TinyCatPerson
+    requiredLegs: 2
+  - type: Inventory
+    speciesId: tcp
+  - type: LanguageKnowledge
+    speaks:
+    - GalacticCommon
+    understands:
+    - GalacticCommon
+
+- type: entity
+  parent: BaseSpeciesDummy
+  id: MobTCPDummy
+  noSpawn: true
+  description: A dummy tcp meant to be used in character setup.
+  components:
+  - type: HumanoidAppearance
+    species: TinyCatPerson

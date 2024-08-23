@@ -1,0 +1,40 @@
+﻿- type: body
+  name: "tiny cat person"
+  id: TinyCatPerson
+  root: torso
+  slots:
+    head:
+      part: HeadTCP
+      connections:
+      - torso
+    torso:
+      part: TorsoTCP
+      connections:
+      - right arm
+      - left arm
+      - right leg
+      - left leg
+    right arm:
+      part: RightArmTCP
+      connections:
+      - right hand
+    left arm:
+      part: LeftArmTCP
+      connections:
+      - left hand
+    right hand:
+      part: RightHandTCP
+    left hand:
+      part: LeftHandTCP
+    right leg:
+      part: RightLegTCP
+      connections:
+      - right foot
+    left leg:
+      part: LeftLegTCP
+      connections:
+      - left foot
+    right foot:
+      part: RightFootTCP
+    left foot:
+      part: LeftFootTCP

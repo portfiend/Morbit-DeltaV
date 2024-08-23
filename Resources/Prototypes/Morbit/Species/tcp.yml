@@ -1,0 +1,156 @@
+- type: species
+  id: TinyCatPerson
+  name: species-name-tcp
+  roundStart: true
+  prototype: MobTCP
+  sprites: MobTCPSprites
+  defaultSkinTone: "#34a223"
+  markingLimits: MobTCPMarkingLimits
+  dollPrototype: MobTCPDummy
+  skinColoration: Hues
+  maleFirstNames: names_tcp_male
+  femaleFirstNames: names_tcp_female
+  naming: FirstDashFirst
+  minHeight: 0.3
+  defaultHeight: 0.45
+  maxHeight: 0.9
+  averageHeight: 33.3
+  minWidth: 0.3
+  defaultWidth: 0.45
+  maxWidth: 0.9
+  averageWidth: 14.2
+
+- type: speciesBaseSprites
+  id: MobTCPSprites
+  sprites:
+    Head: MobTCPHead
+    Snout: MobHumanoidAnyMarking
+    Chest: MobTCPTorso
+    HeadTop: MobHumanoidAnyMarking
+    HeadSide: MobHumanoidAnyMarking
+    Tail: MobHumanoidAnyMarking
+    Eyes: MobHumanoidEyes
+    LArm: MobTCPLArm
+    RArm: MobTCPRArm
+    LHand: MobTCPLHand
+    RHand: MobTCPRHand
+    LLeg: MobTCPLLeg
+    RLeg: MobTCPRLeg
+    LFoot: MobTCPLFoot
+    RFoot: MobTCPRFoot
+
+- type: markingPoints
+  id: MobTCPMarkingLimits
+  onlyWhitelisted: true
+  points:
+    Hair:
+      points: 0
+      required: false
+    FacialHair:
+      points: 0
+      required: false
+    Tail:
+      points: 1
+      required: false
+    Snout:
+      points: 1
+      required: false
+    HeadTop:
+      points: 1
+      required: false
+    HeadSide:
+      points: 1
+      required: false
+    Chest:
+      points: 1
+      required: false
+    Legs:
+      points: 1
+      required: false
+    Arms:
+      points: 1
+      required: false
+
+- type: humanoidBaseSprite
+  id: MobTCPHead
+  baseSprite:
+    sprite: Morbit/Mobs/Species/TCP/parts.rsi
+    state: head_m
+
+- type: humanoidBaseSprite
+  id: MobTCPHeadMale
+  baseSprite:
+    sprite: Morbit/Mobs/Species/TCP/parts.rsi
+    state: head_m
+
+- type: humanoidBaseSprite
+  id: MobTCPHeadFemale
+  baseSprite:
+    sprite: Morbit/Mobs/Species/TCP/parts.rsi
+    state: head_f
+
+- type: humanoidBaseSprite
+  id: MobTCPTorso
+  baseSprite:
+    sprite: Morbit/Mobs/Species/TCP/parts.rsi
+    state: torso_m
+
+- type: humanoidBaseSprite
+  id: MobTCPTorsoMale
+  baseSprite:
+    sprite: Morbit/Mobs/Species/TCP/parts.rsi
+    state: torso_m
+
+- type: humanoidBaseSprite
+  id: MobTCPTorsoFemale
+  baseSprite:
+    sprite: Morbit/Mobs/Species/TCP/parts.rsi
+    state: torso_f
+
+- type: humanoidBaseSprite
+  id: MobTCPLLeg
+  baseSprite:
+    sprite: Morbit/Mobs/Species/TCP/parts.rsi
+    state: l_leg
+
+- type: humanoidBaseSprite
+  id: MobTCPLHand
+  baseSprite:
+    sprite: Morbit/Mobs/Species/TCP/parts.rsi
+    state: l_hand
+
+- type: humanoidBaseSprite
+  id: MobTCPLArm
+  baseSprite:
+    sprite: Morbit/Mobs/Species/TCP/parts.rsi
+    state: l_arm
+
+- type: humanoidBaseSprite
+  id: MobTCPLFoot
+  baseSprite:
+    sprite: Morbit/Mobs/Species/TCP/parts.rsi
+    state: l_foot
+
+- type: humanoidBaseSprite
+  id: MobTCPRLeg
+  baseSprite:
+    sprite: Morbit/Mobs/Species/TCP/parts.rsi
+    state: r_leg
+
+- type: humanoidBaseSprite
+  id: MobTCPRHand
+  baseSprite:
+    sprite: Morbit/Mobs/Species/TCP/parts.rsi
+    state: r_hand
+
+- type: humanoidBaseSprite
+  id: MobTCPRArm
+  baseSprite:
+    sprite: Morbit/Mobs/Species/TCP/parts.rsi
+    state: r_arm
+
+- type: humanoidBaseSprite
+  id: MobTCPRFoot
+  baseSprite:
+    sprite: Morbit/Mobs/Species/TCP/parts.rsi
+    state: r_foot

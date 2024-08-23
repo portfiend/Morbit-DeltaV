@@ -1,0 +1,7 @@
+- type: entity
+  save: false
+  name: Urist McTCP
+  parent: BaseMobTCP
+  id: MobTCP
+  components:
+    - type: PotentialPsionic
