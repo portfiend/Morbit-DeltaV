@@ -35,11 +35,6 @@ public abstract partial class TCPAbilityType : ITCPAbilityType
 
     protected EntityUid User;
 
-    /// <summary>
-    ///     Constructor for TCPAbilityType.
-    /// </summary>
-    /// <param name="user">The user entity UID.</param>
-    /// <param name="actions">The SharedActionsSystem instance.</param>
     public TCPAbilityType(EntityUid user, SharedActionsSystem actions)
     {
         User = user;
@@ -124,6 +119,14 @@ public abstract partial class TCPAbilityType : ITCPAbilityType
     }
 }
 
+/// <summary>
+///     Ability requires the user to enter an "ascended" state.
+///     User can use their ability infinitely and rapidly while ascended to apply an effect.
+///     Upon descending, effects of the ability are undone.
+///     Staying ascended costs health.
+///     
+///     Applicable to Abstract types.
+/// </summary>
 public sealed class ActiveAscensionAbility : TCPAbilityType, ITCPToggleableAbilityType
 {
     private const string ASCEND_ACTION_PROTOTYPE = "ActionTCPAscend";
@@ -131,7 +134,7 @@ public sealed class ActiveAscensionAbility : TCPAbilityType, ITCPToggleableAbili
     public EntityUid? AbilityAction = null;
 
     /// <summary>
-    ///     Constructor for ActiveAscensionAbility.
+    /// ///     Constructor for ActiveAscensionAbility.
     /// </summary>
     /// <param name="user">The user entity UID.</param>
     /// <param name="actions">The SharedActionsSystem instance.</param>
@@ -183,6 +186,11 @@ public sealed class ActiveAscensionAbility : TCPAbilityType, ITCPToggleableAbili
     }
 }
 
+/// <summary>
+///     Ability to select a target and inflict an effect on them.
+///
+///     Applicable to Body, Form, Nature types.
+/// </summary>
 public sealed class ActiveTargetedAbility : TCPAbilityType
 {
     private const string ABILITY_PULSE_TARGETED_PROTOTYPE = "ActionTCPAbilityTargeted";
@@ -205,6 +213,11 @@ public sealed class ActiveTargetedAbility : TCPAbilityType
     }
 }
 
+/// <summary>
+///     Uses their ability on themselves without selecting a target.
+///
+///     Applicable to Food and some Weapon types.
+/// </summary>
 public sealed class ActiveSelfAbility : TCPAbilityType
 {
     /// <summary>
@@ -225,16 +238,16 @@ public sealed class ActiveSelfAbility : TCPAbilityType
     }
 }
 
+/// <summary>
+///     A toggleable "passive" effect. May have some cost (health or otherwise) while active.
+///
+///     Applicable to some Machine and Storage types.
+/// </summary>
 public sealed class ActiveStatusAbility : TCPAbilityType, ITCPToggleableAbilityType
 {
     private const string ABILITY_PULSE_STATUS_PROTOTYPE = "ActionTCPAbilityStatus";
     public bool Enabled { get; private set; } = false;
 
-    /// <summary>
-    ///     Constructor for ActiveStatusAbility.
-    /// </summary>
-    /// <param name="user">The user entity UID.</param>
-    /// <param name="actions">The SharedActionsSystem instance.</param>
     public ActiveStatusAbility(EntityUid user, SharedActionsSystem actions) : base(user, actions)
     { }
 
@@ -258,15 +271,16 @@ public sealed class ActiveStatusAbility : TCPAbilityType, ITCPToggleableAbilityT
     }
 }
 
+/// <summary>
+///     Exposure to the user creates "buildup" over time, but the user may also "pulse" their
+///     ability for instantaneous effects - usually about 30 seconds of buildup.
+///
+///     Applicable to many Creature types.
+/// </summary>
 public sealed class PassiveWithPulseAbility : TCPAbilityType
 {
     private const string ABILITY_PULSE_ACTION_PROTOTYPE = "ActionTCPAbilityPulse";
 
-    /// <summary>
-    ///     Constructor for PassiveWithPulseAbility.
-    /// </summary>
-    /// <param name="user">The user entity UID.</param>
-    /// <param name="actions">The SharedActionsSystem instance.</param>
     public PassiveWithPulseAbility(EntityUid user, SharedActionsSystem actions) : base(user, actions)
     { }
 
@@ -280,17 +294,20 @@ public sealed class PassiveWithPulseAbility : TCPAbilityType
     }
 }
 
+/// <summary>
+///     User does something passively and has no relevant action.
+///
+///     Applicable to some Storage types.
+/// </summary>
 public sealed class PassiveAbility : TCPAbilityType
 {
-    /// <summary>
-    ///     Constructor for PassiveAbility.
-    /// </summary>
-    /// <param name="user">The user entity UID.</param>
-    /// <param name="actions">The SharedActionsSystem instance.</param>
     public PassiveAbility(EntityUid user, SharedActionsSystem actions) : base(user, actions)
     { }
 }
 
+/// <summary>
+///     No ability.
+/// </summary>
 public sealed class NullifiedAbility : TCPAbilityType
 {
     /// <summary>
