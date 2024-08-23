@@ -9,9 +9,8 @@
   components:
   - type: HumanoidAppearance
     species: TinyCatPerson
-  - type: Puller
-    needsHands: false
-  - type: Carriable # Carrying system from nyanotrasen.
+  - type: Carriable
+    pickupDuration: 5 # Slightly higher, so it takes more time for complexes
   - type: Icon
     sprite: Morbit/Mobs/Species/TCP/parts.rsi
     state: full
@@ -32,6 +31,9 @@
     requiredLegs: 2
   - type: Inventory
     speciesId: tcp
+    templateId: tcp
+  - type: PickupSizeLimit
+        maximumSize: Normal
 
 - type: entity
   parent: BaseSpeciesDummy

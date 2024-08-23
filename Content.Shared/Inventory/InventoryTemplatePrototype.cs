@@ -1,4 +1,5 @@
 using System.Numerics;
+using Content.Shared.Item;
 using Content.Shared.Whitelist;
 using Robust.Shared.Prototypes;
 
@@ -55,4 +56,9 @@ public sealed partial class SlotDefinition
     ///     Entity blacklist for CanEquip checks.
     /// </summary>
     [DataField("blacklist")] public EntityWhitelist? Blacklist = null;
+
+    /// <summary>
+    ///     Morbit: Maximum item size for CanEquip checks
+    /// </summary>
+    [DataField("maxSize")] public ProtoId<ItemSizePrototype>? MaximumSize = null;
 }

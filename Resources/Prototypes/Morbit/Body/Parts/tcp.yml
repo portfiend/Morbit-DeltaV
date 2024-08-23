@@ -74,7 +74,7 @@
 - type: entity
   id: RightHandTCP
   name: "right TCP hand"
-  parent: [PartTCP, BaseRightHand]
+  parent: [PartTCP]
   components:
   - type: Sprite
     sprite: Morbit/Mobs/Species/TCP/parts.rsi

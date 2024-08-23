@@ -257,15 +257,24 @@ public abstract partial class InventorySystem
             }
         }
 
+        // Morbit: Use MaximumSize
         var fittingInPocket = slotDefinition.SlotFlags.HasFlag(SlotFlags.POCKET) &&
-                              item != null &&
-                              _item.GetSizePrototype(item.Size) <= _item.GetSizePrototype(PocketableItemSize);
-        if (clothing == null && !fittingInPocket
-            || clothing != null && !clothing.Slots.HasFlag(slotDefinition.SlotFlags) && !fittingInPocket)
+            item != null &&
+            _item.GetSizePrototype(item.Size) <= _item.GetSizePrototype(PocketableItemSize);
+
+        var fittingInSlot = slotDefinition.MaximumSize == null ||
+            item != null &&
+            _item.GetSizePrototype(item.Size) <= _item.GetSizePrototype(slotDefinition.MaximumSize.Value);
+
+        var clothingHasSlot = clothing != null &&
+            clothing.Slots.HasFlag(slotDefinition.SlotFlags);
+
+        if (!fittingInPocket && !clothingHasSlot || !fittingInSlot)
         {
             reason = "inventory-component-can-equip-does-not-fit";
             return false;
         }
+        // End Morbit
 
         if (!CanAccess(actor, target, itemUid))
         {
