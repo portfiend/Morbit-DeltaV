@@ -4,6 +4,7 @@ using Content.Shared.Damage.Prototypes;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Morbit.TCP.Components;
+using Content.Shared.Morbit.TCP.Prototypes;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Morbit.TCP;
@@ -25,20 +26,19 @@ public interface ITCPToggleableAbilityType
 /// </summary>
 public abstract partial class TCPAbilityType : ITCPAbilityType
 {
+    protected const TCPAbilityTrigger ABILITY_TRIGGER = TCPAbilityTrigger.Nullified;
     protected const string ABILITY_ACTION_PROTOTYPE = "ActionTCPAbility";
     protected const float HEALTH_LEVEL = 8.0f;
     private const string HEALTH_COST_DAMAGE_TYPE = "Strain";
 
-    [Dependency] private readonly MobThresholdSystem _mobThresholdSystem = default!;
-    [Dependency] private readonly PrototypeManager _prototypeManager = default!;
-    protected readonly SharedActionsSystem Actions;
+    protected readonly IEntityManager Entities;
 
     protected EntityUid User;
 
-    public TCPAbilityType(EntityUid user, SharedActionsSystem actions)
+    public TCPAbilityType(EntityUid user)
     {
         User = user;
-        Actions = actions;
+        Entities = IoCManager.Resolve<IEntityManager>();
     }
 
     public virtual void Load()
@@ -49,9 +49,11 @@ public abstract partial class TCPAbilityType : ITCPAbilityType
         if (!GetAbilityComponent(out var component))
             return;
 
+        var actions = Entities.System<SharedActionsSystem>();
+
         foreach (var action in component.Actions)
         {
-            Actions.RemoveAction(action);
+            actions.RemoveAction(action);
         }
     }
 
@@ -60,15 +62,16 @@ public abstract partial class TCPAbilityType : ITCPAbilityType
 
     protected bool GetAbilityComponent([NotNullWhen(true)] out TCPAbilityComponent? ability)
     {
-        var entityManager = IoCManager.Resolve<IEntityManager>();
-        entityManager.TryGetComponent<TCPAbilityComponent>(User, out var comp);
+        Entities.TryGetComponent<TCPAbilityComponent>(User, out var comp);
         ability = comp;
         return comp is not null;
     }
 
     private void UpdateActionCosts(float levelCost = 1.0f, ActionHealthCostComponent? comp = null)
     {
-        _prototypeManager.TryIndex<DamageTypePrototype>(HEALTH_COST_DAMAGE_TYPE, out var damageType);
+        var mobThresholdSystem = Entities.System<MobThresholdSystem>();
+        var prototypeManager = IoCManager.Resolve<IPrototypeManager>();
+        prototypeManager.TryIndex<DamageTypePrototype>(HEALTH_COST_DAMAGE_TYPE, out var damageType);
 
         if (damageType is null || comp is null)
             return;
@@ -76,7 +79,7 @@ public abstract partial class TCPAbilityType : ITCPAbilityType
         var damageSpecifier = new Damage.DamageSpecifier(damageType, HEALTH_LEVEL * levelCost);
         comp.Damage = damageSpecifier;
 
-        _mobThresholdSystem.TryGetThresholdForState(User, MobState.Critical, out var critThreshold);
+        mobThresholdSystem.TryGetThresholdForState(User, MobState.Critical, out var critThreshold);
         if (critThreshold is null)
             return;
 
@@ -84,38 +87,46 @@ public abstract partial class TCPAbilityType : ITCPAbilityType
     }
 
     /// <summary>
-    ///     Creates a basic ability action.
-    /// </summary>
-    /// <param name="levelCost">How many health levels the action costs.</param>
-    /// <param name="actionProto">Prototype to use.</param>
-    /// <returns></returns>
-    protected EntityUid CreateAbilityAction(float levelCost = 1.0f,
-        string? actionProto = ABILITY_ACTION_PROTOTYPE)
-    {
-        var entityManager = IoCManager.Resolve<IEntityManager>();
-        var entity = entityManager.Spawn(actionProto);
-
-        var comp = entityManager.EnsureComponent<ActionHealthCostComponent>(User);
-        UpdateActionCosts(levelCost, comp);
-
-        return entity;
-    }
-
-    /// <summary>
     ///     Creates a basic "Ability" action and adds it to the user.
+    ///     Also sets the health cost of the ability, while we're at it.
     /// </summary>
     /// <param name="actionProto">Prototype of the action to use.</param>
     /// <param name="levelCost">How many health levels the action costs.</param>
-    protected void LoadAbilityAction(float levelCost = 1.0f,
+    protected EntityUid? LoadAbilityAction(float levelCost = 1.0f,
         string actionProto = ABILITY_ACTION_PROTOTYPE)
     {
         if (!GetAbilityComponent(out var comp))
-            return;
+            return null;
 
-        var ability = CreateAbilityAction(levelCost, actionProto);
-        Actions.AddAction(User, ability, ability);
+        var actions = Entities.System<SharedActionsSystem>();
+        EntityUid? actionRef = null;
+        actions.AddAction(User, ref actionRef, actionProto);
 
-        comp.Actions.Add(ability);
+        if (actionRef is null)
+            return actionRef;
+
+        var action = actionRef.Value;
+        var healthCost = Entities.EnsureComponent<ActionHealthCostComponent>(action);
+        UpdateActionCosts(levelCost, healthCost);
+
+        comp.Actions.Add(action);
+        return action;
+    }
+
+    /// <summary>
+    ///     Gets the corresponding effect from a TCPAbilityPrototype's ability list.
+    ///     These effects correspond to AbilityTriggers.
+    /// </summary>
+    /// <param name="protoId"></param>
+    /// <returns></returns>
+    protected string? GetAbilityFromPrototype(ProtoId<TCPAbilityPrototype> protoId)
+    {
+        var prototypeManager = IoCManager.Resolve<IPrototypeManager>();
+        if (!prototypeManager.TryIndex(protoId, out var tcpAbility))
+            return null;
+
+        tcpAbility.Abilities.TryGetValue(ABILITY_TRIGGER, out var ability);
+        return ability;
     }
 }
 
@@ -133,12 +144,7 @@ public sealed class ActiveAscensionAbility : TCPAbilityType, ITCPToggleableAbili
     public bool Enabled { get; private set; } = false;
     public EntityUid? AbilityAction = null;
 
-    /// <summary>
-    /// ///     Constructor for ActiveAscensionAbility.
-    /// </summary>
-    /// <param name="user">The user entity UID.</param>
-    /// <param name="actions">The SharedActionsSystem instance.</param>
-    public ActiveAscensionAbility(EntityUid user, SharedActionsSystem actions) : base(user, actions)
+    public ActiveAscensionAbility(EntityUid user) : base(user)
     { }
 
     public override void Load()
@@ -146,8 +152,9 @@ public sealed class ActiveAscensionAbility : TCPAbilityType, ITCPToggleableAbili
         if (!GetAbilityComponent(out var comp))
             return;
 
+        var actions = Entities.System<SharedActionsSystem>();
         EntityUid? ascendId = null;
-        var actionAdded = Actions.AddAction(User, ref ascendId, ASCEND_ACTION_PROTOTYPE);
+        var actionAdded = actions.AddAction(User, ref ascendId, ASCEND_ACTION_PROTOTYPE);
         if (actionAdded && ascendId is not null)
             comp.Actions.Add(ascendId.Value);
     }
@@ -161,17 +168,20 @@ public sealed class ActiveAscensionAbility : TCPAbilityType, ITCPToggleableAbili
         if (!GetAbilityComponent(out var comp))
             return;
 
-        Enabled = true;
+        Enabled = !Enabled;
 
-        var action = CreateAbilityAction(0.0f);
-        Actions.AddAction(User, action, action);
-        comp.Actions.Add(action);
+        if (!Enabled)
+        {
+            Deactivate();
+            return;
+        }
+
+        var action = LoadAbilityAction(0.0f, ABILITY_ACTION_PROTOTYPE);
         AbilityAction = action;
     }
 
     public void Deactivate()
     {
-        Enabled = false;
         RemoveAbilityAction();
     }
 
@@ -180,8 +190,9 @@ public sealed class ActiveAscensionAbility : TCPAbilityType, ITCPToggleableAbili
         if (!GetAbilityComponent(out var comp) || AbilityAction is null)
             return;
 
+        var actions = Entities.System<SharedActionsSystem>();
         var action = AbilityAction.Value;
-        Actions.RemoveAction(action);
+        actions.RemoveAction(action);
         comp.Actions.Remove(action);
     }
 }
@@ -200,7 +211,7 @@ public sealed class ActiveTargetedAbility : TCPAbilityType
     /// </summary>
     /// <param name="user">The user entity UID.</param>
     /// <param name="actions">The SharedActionsSystem instance.</param>
-    public ActiveTargetedAbility(EntityUid user, SharedActionsSystem actions) : base(user, actions)
+    public ActiveTargetedAbility(EntityUid user) : base(user)
     { }
 
     public override void Load()
@@ -225,7 +236,7 @@ public sealed class ActiveSelfAbility : TCPAbilityType
     /// </summary>
     /// <param name="user">The user entity UID.</param>
     /// <param name="actions">The SharedActionsSystem instance.</param>
-    public ActiveSelfAbility(EntityUid user, SharedActionsSystem actions) : base(user, actions)
+    public ActiveSelfAbility(EntityUid user) : base(user)
     { }
 
     public override void Load()
@@ -248,7 +259,7 @@ public sealed class ActiveStatusAbility : TCPAbilityType, ITCPToggleableAbilityT
     private const string ABILITY_PULSE_STATUS_PROTOTYPE = "ActionTCPAbilityStatus";
     public bool Enabled { get; private set; } = false;
 
-    public ActiveStatusAbility(EntityUid user, SharedActionsSystem actions) : base(user, actions)
+    public ActiveStatusAbility(EntityUid user) : base(user)
     { }
 
     public override void Load()
@@ -281,7 +292,7 @@ public sealed class PassiveWithPulseAbility : TCPAbilityType
 {
     private const string ABILITY_PULSE_ACTION_PROTOTYPE = "ActionTCPAbilityPulse";
 
-    public PassiveWithPulseAbility(EntityUid user, SharedActionsSystem actions) : base(user, actions)
+    public PassiveWithPulseAbility(EntityUid user) : base(user)
     { }
 
     public override void Load()
@@ -301,7 +312,7 @@ public sealed class PassiveWithPulseAbility : TCPAbilityType
 /// </summary>
 public sealed class PassiveAbility : TCPAbilityType
 {
-    public PassiveAbility(EntityUid user, SharedActionsSystem actions) : base(user, actions)
+    public PassiveAbility(EntityUid user) : base(user)
     { }
 }
 
@@ -315,6 +326,6 @@ public sealed class NullifiedAbility : TCPAbilityType
     /// </summary>
     /// <param name="user">The user entity UID.</param>
     /// <param name="actions">The SharedActionsSystem instance.</param>
-    public NullifiedAbility(EntityUid user, SharedActionsSystem actions) : base(user, actions)
+    public NullifiedAbility(EntityUid user) : base(user)
     { }
 }

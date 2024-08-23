@@ -5,14 +5,19 @@ namespace Content.Shared.Morbit.TCP.Systems;
 
 public abstract class SharedTCPAbilitySystem : EntitySystem
 {
-    [Dependency] private readonly SharedActionsSystem _actionsSystem = default!;
-
     public override void Initialize()
     {
         base.Initialize();
 
         SubscribeLocalEvent<TCPAbilityComponent, MapInitEvent>(OnInit);
         SubscribeLocalEvent<TCPAbilityComponent, ComponentShutdown>(OnShutdown);
+
+        // Action callbacks
+        SubscribeLocalEvent<TCPAbilityComponent, ToggleAscensionEvent>(OnToggleAscension);
+        SubscribeLocalEvent<TCPAbilityComponent, UseAbilityEvent>(OnUseAbility);
+        SubscribeLocalEvent<TCPAbilityComponent, UseAbilityTargetedEvent>(OnUseAbilityTargeted);
+        SubscribeLocalEvent<TCPAbilityComponent, ToggleStatusAbilityEvent>(OnToggleAbility);
+        SubscribeLocalEvent<TCPAbilityComponent, PulseAbilityEvent>(OnPulseAbility);
     }
 
     private void OnInit(EntityUid uid, TCPAbilityComponent component, MapInitEvent args)
@@ -31,7 +36,7 @@ public abstract class SharedTCPAbilitySystem : EntitySystem
             UnloadAbility(component);
 
         var abilityTypeClass = TCPAbilityTypeFactory
-            .CreateAbilityType(component.AbilityTrigger, uid, _actionsSystem);
+            .CreateAbilityType(component.AbilityTrigger, uid);
 
         component.AbilityTypeClass = abilityTypeClass;
         abilityTypeClass.Load();
@@ -44,5 +49,34 @@ public abstract class SharedTCPAbilitySystem : EntitySystem
 
         component.AbilityTypeClass.Unload();
         component.AbilityTypeClass = null;
+    }
+
+    private void OnToggleAscension(EntityUid uid, TCPAbilityComponent component, ToggleAscensionEvent args)
+    {
+        if (component?.AbilityTypeClass is ActiveAscensionAbility abilityTypeClass)
+        {
+            abilityTypeClass.ActivateSecondary();
+            args.Handled = true;
+        }
+    }
+
+    private void OnUseAbilityTargeted(EntityUid uid, TCPAbilityComponent component, UseAbilityTargetedEvent args)
+    {
+        throw new NotImplementedException();
+    }
+
+    private void OnToggleAbility(EntityUid uid, TCPAbilityComponent component, ToggleStatusAbilityEvent args)
+    {
+        throw new NotImplementedException();
+    }
+
+    private void OnPulseAbility(EntityUid uid, TCPAbilityComponent component, PulseAbilityEvent args)
+    {
+        throw new NotImplementedException();
+    }
+
+    private void OnUseAbility(EntityUid uid, TCPAbilityComponent component, UseAbilityEvent args)
+    {
+        throw new NotImplementedException();
     }
 }

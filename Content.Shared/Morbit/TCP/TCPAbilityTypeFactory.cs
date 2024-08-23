@@ -5,18 +5,17 @@ namespace Content.Shared.Morbit.TCP;
 public static class TCPAbilityTypeFactory
 {
     public static ITCPAbilityType CreateAbilityType(TCPAbilityTrigger trigger,
-        EntityUid user,
-        SharedActionsSystem actionsSystem)
+        EntityUid user)
     {
         return trigger switch
         {
-            TCPAbilityTrigger.ActiveAscension => new ActiveAscensionAbility(user, actionsSystem),
-            TCPAbilityTrigger.ActiveTargeted => new ActiveTargetedAbility(user, actionsSystem),
-            TCPAbilityTrigger.ActiveStatus => new ActiveStatusAbility(user, actionsSystem),
-            TCPAbilityTrigger.ActiveSelf => new ActiveSelfAbility(user, actionsSystem),
-            TCPAbilityTrigger.PassiveWithPulse => new PassiveWithPulseAbility(user, actionsSystem),
-            TCPAbilityTrigger.Passive => new PassiveAbility(user, actionsSystem),
-            _ => new NullifiedAbility(user, actionsSystem)
+            TCPAbilityTrigger.ActiveAscension => new ActiveAscensionAbility(user),
+            TCPAbilityTrigger.ActiveTargeted => new ActiveTargetedAbility(user),
+            TCPAbilityTrigger.ActiveStatus => new ActiveStatusAbility(user),
+            TCPAbilityTrigger.ActiveSelf => new ActiveSelfAbility(user),
+            TCPAbilityTrigger.PassiveWithPulse => new PassiveWithPulseAbility(user),
+            TCPAbilityTrigger.Passive => new PassiveAbility(user),
+            _ => new NullifiedAbility(user)
         };
     }
 }
