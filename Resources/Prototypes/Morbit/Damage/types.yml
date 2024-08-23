@@ -1,0 +1,7 @@
+
+# Represents the exhaustion felt by beings that require health to use their powers.
+# In our case, this includes Tiny Cat People!
+- type: damageType
+  id: Strain
+  armorCoefficientPrice: 2
+  armorFlatPrice: 10

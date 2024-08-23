@@ -1,0 +1,79 @@
+- type: entity
+  id: ActionTCPAscend
+  name: Ascend
+  description: Enter an ascended state, allowing you to use your ability.
+  noSpawn: true
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: Interface/Actions/actions_borg.rsi
+      state: state-laws
+    event: !type:ToggleAscensionEvent
+    useDelay: 0.5
+
+- type: entity
+  id: ActionTCPAbility
+  name: Use TCP Ability
+  description: Use your TCP ability without a specific target.
+  noSpawn: true
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: Interface/Actions/actions_borg.rsi
+      state: state-laws
+    event: !type:UseAbilityEvent
+    useDelay: 0.5
+  - type: ActionHealthCost
+    damage:
+      Strain: 8.0
+    useDelay: 0.5
+
+- type: entity
+  id: ActionTCPAbilityTargeted
+  name: Use TCP Ability
+  description: Target a mob or object to use your TCP ability on it.
+  noSpawn: true
+  components:
+  - type: EntityTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: Interface/Actions/actions_borg.rsi
+      state: state-laws
+    event: !type:UseAbilityTargetedEvent
+    useDelay: 0.5
+  - type: ActionHealthCost
+    damage:
+      Strain: 8.0
+
+- type: entity
+  id: ActionTCPAbilityStatus
+  name: Use TCP Ability
+  description: Toggle your TCP ability on or off.
+  noSpawn: true
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: Interface/Actions/actions_borg.rsi
+      state: state-laws
+    event: !type:ToggleStatusAbilityEvent
+    useDelay: 0.5
+
+- type: entity
+  id: ActionTCPAbilityPulse
+  name: Pulse Ability
+  description: Creates a "pulse" of your ability's passive effects, inflicting them on your surroundings instantly.
+  noSpawn: true
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: Interface/Actions/actions_borg.rsi
+      state: state-laws
+    event: !type:PulseAbilityEvent
+    useDelay: 0.5
+  - type: ActionHealthCost
+    damage:
+      Strain: 16.0
