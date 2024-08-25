@@ -2,7 +2,7 @@
   id: Micro
   mapName: 'Micro'
   mapPath: /Maps/micro.yml
-  minPlayers: 5
+  minPlayers: 0
   maxPlayers: 45
   stations:
     Micro:
