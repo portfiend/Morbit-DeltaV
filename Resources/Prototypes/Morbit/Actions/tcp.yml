@@ -43,6 +43,7 @@
       state: state-laws
     event: !type:UseAbilityTargetedEvent
     useDelay: 0.5
+    range: 2.0
   - type: ActionHealthCost
     damage:
       Strain: 8.0
