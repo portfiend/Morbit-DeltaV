@@ -29,18 +29,3 @@ public sealed partial class TCPAbilityComponent : Component
     /// </summary>
     public List<EntityUid> Actions = new();
 }
-
-public sealed partial class ToggleAscensionEvent : InstantActionEvent
-{ }
-
-public sealed partial class UseAbilityEvent : InstantActionEvent
-{ }
-
-public sealed partial class UseAbilityTargetedEvent : EntityTargetActionEvent
-{ }
-
-public sealed partial class ToggleStatusAbilityEvent : InstantActionEvent
-{ }
-
-public sealed partial class PulseAbilityEvent : InstantActionEvent
-{ }
