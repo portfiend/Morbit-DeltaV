@@ -25,7 +25,7 @@ public sealed partial class SharedProximityExposureSystem : EntitySystem
         while (query.MoveNext(out var uid, out var exposure))
         {
             if (_gameTiming.CurTime < exposure.NextUpdate)
-                return;
+                continue;
 
             var inRange = GetEntitiesInRange(uid, exposure.ExposureRange);
             GiveInRangeExposure(uid, exposure, inRange);
