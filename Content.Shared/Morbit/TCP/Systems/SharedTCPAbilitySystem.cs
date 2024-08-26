@@ -16,7 +16,7 @@ public abstract class SharedTCPAbilitySystem : EntitySystem
         SubscribeLocalEvent<TCPAbilityComponent, ToggleAscensionEvent>(OnToggleAscension);
         SubscribeLocalEvent<TCPAbilityComponent, UseAbilityEvent>(OnUseAbility);
         SubscribeLocalEvent<TCPAbilityComponent, UseAbilityTargetedEvent>(OnUseAbilityTargeted);
-        SubscribeLocalEvent<TCPAbilityComponent, ToggleStatusAbilityEvent>(OnToggleAbility);
+        SubscribeLocalEvent<TCPAbilityComponent, ToggleStatusAbilityEvent>(OnToggleStatusAbility);
         SubscribeLocalEvent<TCPAbilityComponent, PulseAbilityEvent>(OnPulseAbility);
     }
 
@@ -51,6 +51,15 @@ public abstract class SharedTCPAbilitySystem : EntitySystem
         component.AbilityTypeClass = null;
     }
 
+    private void OnToggleStatusAbility(EntityUid uid, TCPAbilityComponent component, InstantActionEvent args)
+    {
+        if (component?.AbilityTypeClass is ActiveStatusAbility abilityTypeClass)
+        {
+            abilityTypeClass.Activate();
+            args.Handled = true;
+        }
+    }
+
     private void OnToggleAscension(EntityUid uid, TCPAbilityComponent component, ToggleAscensionEvent args)
     {
         if (component?.AbilityTypeClass is ActiveAscensionAbility abilityTypeClass)
@@ -61,11 +70,6 @@ public abstract class SharedTCPAbilitySystem : EntitySystem
     }
 
     private void OnUseAbilityTargeted(EntityUid uid, TCPAbilityComponent component, UseAbilityTargetedEvent args)
-    {
-        throw new NotImplementedException();
-    }
-
-    private void OnToggleAbility(EntityUid uid, TCPAbilityComponent component, ToggleStatusAbilityEvent args)
     {
         throw new NotImplementedException();
     }
