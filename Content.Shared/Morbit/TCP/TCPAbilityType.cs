@@ -159,8 +159,10 @@ public sealed class ActiveAscensionAbility : TCPAbilityType, ITCPToggleableAbili
             comp.Actions.Add(ascendId.Value);
     }
 
-    public override void Activate()
+    public override void Unload()
     {
+        Deactivate();
+        base.Unload();
     }
 
     public void ActivateSecondary()
@@ -267,13 +269,15 @@ public sealed class ActiveStatusAbility : TCPAbilityType, ITCPToggleableAbilityT
         LoadAbilityAction(0.0f, ABILITY_PULSE_STATUS_PROTOTYPE);
     }
 
-    public override void Activate()
+    public override void Unload()
     {
+        Deactivate();
+        base.Unload();
     }
 
-    public void ActivateSecondary()
+    public override void Activate()
     {
-        Enabled = true;
+        Enabled = !Enabled;
     }
 
     public void Deactivate()
