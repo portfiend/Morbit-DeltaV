@@ -128,7 +128,7 @@ public abstract partial class ProximityExposureEvent : EntityEventArgs
     /// </summary>
     public float Exposure { get; }
 
-    public ProximityExposureEvent(EntityUid source, EntityUid target, ProximityExposureComponent component, float exposure)
+    protected ProximityExposureEvent(EntityUid source, EntityUid target, ProximityExposureComponent component, float exposure)
     {
         Source = source;
         Target = target;
