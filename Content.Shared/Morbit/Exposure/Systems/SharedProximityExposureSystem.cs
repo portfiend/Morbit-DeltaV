@@ -106,6 +106,7 @@ public sealed partial class SharedProximityExposureSystem : EntitySystem
     }
 }
 
+[NetSerializable, Serializable]
 public abstract partial class ProximityExposureEvent : EntityEventArgs
 {
     /// <summary>
@@ -137,7 +138,6 @@ public abstract partial class ProximityExposureEvent : EntityEventArgs
     }
 }
 
-[NetSerializable, Serializable]
 public sealed partial class ExposureUpdateEvent : ProximityExposureEvent
 {
     public ExposureUpdateEvent(EntityUid source,
@@ -148,7 +148,6 @@ public sealed partial class ExposureUpdateEvent : ProximityExposureEvent
     { }
 }
 
-[NetSerializable, Serializable]
 public sealed partial class ExposureBuildupEvent : ProximityExposureEvent
 {
     public ExposureBuildupEvent(EntityUid source,
@@ -159,7 +158,6 @@ public sealed partial class ExposureBuildupEvent : ProximityExposureEvent
     { }
 }
 
-[NetSerializable, Serializable]
 public sealed partial class ExposureDecayEvent : ProximityExposureEvent
 {
     public ExposureDecayEvent(EntityUid source,
