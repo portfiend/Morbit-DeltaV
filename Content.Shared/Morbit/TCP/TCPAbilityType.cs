@@ -83,7 +83,7 @@ public abstract partial class TCPAbilityType : ITCPAbilityType
         if (critThreshold is null)
             return;
 
-        comp.MaximumDamage = (float) critThreshold - levelCost * HEALTH_LEVEL;
+        comp.MaximumDamage = (float)critThreshold - levelCost * HEALTH_LEVEL;
     }
 
     /// <summary>
@@ -119,13 +119,13 @@ public abstract partial class TCPAbilityType : ITCPAbilityType
     /// </summary>
     /// <param name="protoId"></param>
     /// <returns></returns>
-    protected string? GetAbilityFromPrototype(ProtoId<TCPAbilityPrototype> protoId)
+    protected ComponentRegistry? GetAbilityFromPrototype(ProtoId<TCPAbilityPrototype> protoId)
     {
         var prototypeManager = IoCManager.Resolve<IPrototypeManager>();
         if (!prototypeManager.TryIndex(protoId, out var tcpAbility))
             return null;
 
-        tcpAbility.Abilities.TryGetValue(ABILITY_TRIGGER, out var ability);
+        tcpAbility.Components.TryGetValue(ABILITY_TRIGGER, out var ability);
         return ability;
     }
 }

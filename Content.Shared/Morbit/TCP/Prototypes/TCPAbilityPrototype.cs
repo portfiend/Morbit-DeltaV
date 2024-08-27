@@ -1,4 +1,5 @@
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
 
 namespace Content.Shared.Morbit.TCP.Prototypes;
 
@@ -12,5 +13,5 @@ public sealed partial class TCPAbilityPrototype : IPrototype
     ///     A representation of possible effects an ability can have, depending on ability type.
     /// </summary>
     [DataField]
-    public Dictionary<TCPAbilityTrigger, string> Abilities = new();
+    public Dictionary<TCPAbilityTrigger, ComponentRegistry> Components = new();
 }
