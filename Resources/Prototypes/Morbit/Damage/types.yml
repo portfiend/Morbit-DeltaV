@@ -3,5 +3,6 @@
 # In our case, this includes Tiny Cat People!
 - type: damageType
   id: Strain
+  name: damage-type-strain
   armorCoefficientPrice: 2
   armorFlatPrice: 10
