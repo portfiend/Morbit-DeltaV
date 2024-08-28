@@ -67,15 +67,12 @@ namespace Content.Shared.Humanoid.Markings
 
             foreach (var (key, marking) in MarkingsByCategory(category))
             {
-                if (onlyWhitelisted && marking.SpeciesRestrictions == null)
+                // Morbit: Check includes master species
+                if (!MarkingIsValidForSpecies(marking, speciesProto, onlyWhitelisted))
                 {
                     continue;
                 }
 
-                if (marking.SpeciesRestrictions != null && !marking.SpeciesRestrictions.Contains(species))
-                {
-                    continue;
-                }
                 res.Add(key, marking);
             }
 
@@ -130,12 +127,8 @@ namespace Content.Shared.Humanoid.Markings
 
             foreach (var (key, marking) in MarkingsByCategory(category))
             {
-                if (onlyWhitelisted && marking.SpeciesRestrictions == null)
-                {
-                    continue;
-                }
-
-                if (marking.SpeciesRestrictions != null && !marking.SpeciesRestrictions.Contains(species))
+                // Morbit: Check includes master species
+                if (!MarkingIsValidForSpecies(marking, speciesProto, onlyWhitelisted))
                 {
                     continue;
                 }
@@ -172,7 +165,7 @@ namespace Content.Shared.Humanoid.Markings
             }
 
             if (proto.MarkingCategory != category ||
-                proto.SpeciesRestrictions != null && !proto.SpeciesRestrictions.Contains(species) ||
+                !MarkingIsValidForSpecies(proto, species) || // Morbit: Include master species in validation
                 proto.SexRestriction != null && proto.SexRestriction != sex)
             {
                 return false;
@@ -204,13 +197,8 @@ namespace Content.Shared.Humanoid.Markings
                 return false;
             }
 
-            if (onlyWhitelisted && prototype.SpeciesRestrictions == null)
-            {
-                return false;
-            }
-
-            if (prototype.SpeciesRestrictions != null
-                && !prototype.SpeciesRestrictions.Contains(species))
+            // Morbit: Include master species in check
+            if (!MarkingIsValidForSpecies(prototype, speciesProto, onlyWhitelisted))
             {
                 return false;
             }
@@ -230,13 +218,8 @@ namespace Content.Shared.Humanoid.Markings
             var speciesProto = prototypeManager.Index<SpeciesPrototype>(species);
             var onlyWhitelisted = prototypeManager.Index<MarkingPointsPrototype>(speciesProto.MarkingPoints).OnlyWhitelisted;
 
-            if (onlyWhitelisted && prototype.SpeciesRestrictions == null)
-            {
-                return false;
-            }
-
-            if (prototype.SpeciesRestrictions != null &&
-                !prototype.SpeciesRestrictions.Contains(species))
+            // Morbit: Include master species in check
+            if (!MarkingIsValidForSpecies(prototype, speciesProto, onlyWhitelisted))
             {
                 return false;
             }
@@ -267,6 +250,25 @@ namespace Content.Shared.Humanoid.Markings
 
             alpha = sprite.LayerAlpha;
             return true;
+        }
+
+        // Morbit: Check that includes "master species" assigned markings.
+        public bool MarkingIsValidForSpecies(MarkingPrototype markingProto, string species, bool? onlyWhitelisted = null)
+        {
+            var speciesProto = _prototypeManager.Index<SpeciesPrototype>(species);
+            return MarkingIsValidForSpecies(markingProto, speciesProto, onlyWhitelisted);
+        }
+
+        public bool MarkingIsValidForSpecies(MarkingPrototype markingProto, SpeciesPrototype species, bool? onlyWhitelisted = null)
+        {
+            onlyWhitelisted ??= _prototypeManager.Index<MarkingPointsPrototype>(species.MarkingPoints).OnlyWhitelisted;
+
+            if (markingProto.SpeciesRestrictions == null)
+                return (bool)!onlyWhitelisted;
+
+            return markingProto.SpeciesRestrictions.Contains(species.ID) || 
+                species.MasterSpecies != null &&
+                markingProto.SpeciesRestrictions.Contains(species.MasterSpecies);
         }
     }
 }

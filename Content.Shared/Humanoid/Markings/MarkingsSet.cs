@@ -164,13 +164,8 @@ public sealed partial class MarkingSet
                     continue;
                 }
 
-                if (onlyWhitelisted && prototype.SpeciesRestrictions == null)
-                {
-                    toRemove.Add((category, marking.MarkingId));
-                }
-
-                if (prototype.SpeciesRestrictions != null
-                    && !prototype.SpeciesRestrictions.Contains(species))
+                // Morbit: Account for master species
+                if (!markingManager.MarkingIsValidForSpecies(prototype, speciesProto, onlyWhitelisted))
                 {
                     toRemove.Add((category, marking.MarkingId));
                 }
