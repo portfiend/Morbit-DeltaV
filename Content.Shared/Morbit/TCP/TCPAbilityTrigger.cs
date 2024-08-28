@@ -33,6 +33,11 @@ public enum TCPAbilityTrigger : byte
     Passive,
 
     /// <summary>
+    ///     The "default" ability of a TCP type. 
+    /// <summary> 
+    Default,
+
+    /// <summary>
     ///     TCP has no ability
     /// </summary>
     Nullified

@@ -4,7 +4,7 @@ namespace Content.Shared.Morbit.TCP;
 
 public static class TCPAbilityTypeFactory
 {
-    public static ITCPAbilityType CreateAbilityType(TCPAbilityTrigger trigger,
+    public static TCPAbilityType CreateAbilityType(TCPAbilityTrigger trigger,
         EntityUid user)
     {
         return trigger switch

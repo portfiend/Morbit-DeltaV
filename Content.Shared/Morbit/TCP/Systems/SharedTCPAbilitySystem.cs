@@ -75,12 +75,12 @@ public abstract class SharedTCPAbilitySystem : EntitySystem
         if (component.AbilityHolders.ContainedEntities.Count > 0)
             UnloadAbilityEffects(component);
 
+        if (component.AbilityTypeClass == null)
+            return;
+
         foreach (var protoId in component.Abilities)
         {
-            if (!_prototypeManager.TryIndex(protoId, out var ability))
-                continue;
-
-            ability.Components.TryGetValue(component.AbilityTrigger, out var comps);
+            var comps = component.AbilityTypeClass.GetCompsFromPrototype(protoId);
 
             if (comps == null)
                 continue;

@@ -27,11 +27,11 @@ public interface ITCPToggleableAbilityType
 /// </summary>
 public abstract partial class TCPAbilityType : ITCPAbilityType
 {
-    protected const TCPAbilityTrigger ABILITY_TRIGGER = TCPAbilityTrigger.Nullified;
     protected const string ABILITY_ACTION_PROTOTYPE = "ActionTCPAbility";
     protected const float HEALTH_LEVEL = 8.0f;
     private const string HEALTH_COST_DAMAGE_TYPE = "Strain";
 
+    protected virtual TCPAbilityTrigger AbilityTrigger => TCPAbilityTrigger.Nullified;
     protected readonly IEntityManager Entities;
 
     protected EntityUid User;
@@ -120,14 +120,20 @@ public abstract partial class TCPAbilityType : ITCPAbilityType
     /// </summary>
     /// <param name="protoId"></param>
     /// <returns></returns>
-    protected ComponentRegistry? GetAbilityFromPrototype(ProtoId<TCPAbilityPrototype> protoId)
+    public ComponentRegistry? GetCompsFromPrototype(ProtoId<TCPAbilityPrototype> protoId)
     {
         var prototypeManager = IoCManager.Resolve<IPrototypeManager>();
-        if (!prototypeManager.TryIndex(protoId, out var tcpAbility))
+        if (!prototypeManager.TryIndex(protoId, out var tcpAbility)
+            || AbilityTrigger == TCPAbilityTrigger.Nullified)
             return null;
 
-        tcpAbility.Components.TryGetValue(ABILITY_TRIGGER, out var ability);
-        return ability;
+        tcpAbility.Components.TryGetValue(AbilityTrigger, out var comps);
+
+        if (comps != null)
+            return comps;
+        
+        tcpAbility.Components.TryGetValue(TCPAbilityTrigger.Default, out var defaultComps);
+        return defaultComps;
     }
 }
 
@@ -145,6 +151,7 @@ public sealed class ActiveAscensionAbility : TCPAbilityType, ITCPToggleableAbili
     private const string ABILITY_PULSE_TARGETED_PROTOTYPE = "ActionTCPAbilityTargeted";
     public bool Enabled { get; private set; } = false;
     public EntityUid? AbilityAction = null;
+    protected override TCPAbilityTrigger AbilityTrigger => TCPAbilityTrigger.ActiveAscension;
 
     public ActiveAscensionAbility(EntityUid user) : base(user)
     { }
@@ -213,12 +220,8 @@ public sealed class ActiveAscensionAbility : TCPAbilityType, ITCPToggleableAbili
 public sealed class ActiveTargetedAbility : TCPAbilityType
 {
     private const string ABILITY_PULSE_TARGETED_PROTOTYPE = "ActionTCPAbilityTargeted";
+    protected override TCPAbilityTrigger AbilityTrigger => TCPAbilityTrigger.ActiveTargeted;
 
-    /// <summary>
-    ///     Constructor for ActiveTargetedAbility.
-    /// </summary>
-    /// <param name="user">The user entity UID.</param>
-    /// <param name="actions">The SharedActionsSystem instance.</param>
     public ActiveTargetedAbility(EntityUid user) : base(user)
     { }
 
@@ -239,11 +242,8 @@ public sealed class ActiveTargetedAbility : TCPAbilityType
 /// </summary>
 public sealed class ActiveSelfAbility : TCPAbilityType
 {
-    /// <summary>
-    ///     Constructor for ActiveSelfAbility.
-    /// </summary>
-    /// <param name="user">The user entity UID.</param>
-    /// <param name="actions">The SharedActionsSystem instance.</param>
+    protected override TCPAbilityTrigger AbilityTrigger => TCPAbilityTrigger.ActiveSelf;
+
     public ActiveSelfAbility(EntityUid user) : base(user)
     { }
 
@@ -266,6 +266,7 @@ public sealed class ActiveStatusAbility : TCPAbilityType, ITCPToggleableAbilityT
 {
     private const string ABILITY_PULSE_STATUS_PROTOTYPE = "ActionTCPAbilityStatus";
     public bool Enabled { get; private set; } = false;
+    protected override TCPAbilityTrigger AbilityTrigger => TCPAbilityTrigger.ActiveStatus;
 
     public ActiveStatusAbility(EntityUid user) : base(user)
     { }
@@ -301,6 +302,7 @@ public sealed class ActiveStatusAbility : TCPAbilityType, ITCPToggleableAbilityT
 public sealed class PassiveWithPulseAbility : TCPAbilityType
 {
     private const string ABILITY_PULSE_ACTION_PROTOTYPE = "ActionTCPAbilityPulse";
+    protected override TCPAbilityTrigger AbilityTrigger => TCPAbilityTrigger.PassiveWithPulse;
 
     public PassiveWithPulseAbility(EntityUid user) : base(user)
     { }
@@ -322,6 +324,7 @@ public sealed class PassiveWithPulseAbility : TCPAbilityType
 /// </summary>
 public sealed class PassiveAbility : TCPAbilityType
 {
+    protected override TCPAbilityTrigger AbilityTrigger => TCPAbilityTrigger.Passive;
     public PassiveAbility(EntityUid user) : base(user)
     { }
 }
@@ -331,6 +334,8 @@ public sealed class PassiveAbility : TCPAbilityType
 /// </summary>
 public sealed class NullifiedAbility : TCPAbilityType
 {
+    protected override TCPAbilityTrigger AbilityTrigger => TCPAbilityTrigger.Nullified;
+
     /// <summary>
     ///     Constructor for NullifiedAbility.
     /// </summary>
