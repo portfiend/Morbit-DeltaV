@@ -1,0 +1,26 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-4.0",
+    "copyright": "portfiend, species concept by Homebrew Deviants",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "helmet"
+        },
+        {
+            "name": "face"
+        },
+        {
+            "name": "pack"
+        },
+        {
+            "name": "strap"
+        },
+        {
+            "name": "strap_buckles"
+        }
+    ]
+}
