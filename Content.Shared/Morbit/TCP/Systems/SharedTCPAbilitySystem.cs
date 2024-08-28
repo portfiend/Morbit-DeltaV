@@ -123,7 +123,7 @@ public abstract class SharedTCPAbilitySystem : EntitySystem
         if (!HasComp<TransformComponent>(args.Target))
             return;
 
-        StartDoAfter(uid, args.Target, 1.0f, 3.0f);
+        StartDoAfter(uid, args.Target, 1.0f, delaySeconds: 1.0f);
         args.Handled = true;
     }
 
@@ -155,7 +155,14 @@ public abstract class SharedTCPAbilitySystem : EntitySystem
     private void StartDoAfter(EntityUid user, EntityUid target, float strength, double delaySeconds)
     {
         var doAfterEvent = new ActivateTCPAbilityDoAfterEvent(strength);
-        var doAfterArgs = new DoAfterArgs(EntityManager, user, TimeSpan.FromSeconds(delaySeconds), doAfterEvent, target, user);
+        var doAfterArgs = new DoAfterArgs(EntityManager, user, TimeSpan.FromSeconds(delaySeconds), doAfterEvent, eventTarget: user, target, user)
+        {
+            NeedHand = true,
+            BreakOnMove = false,
+            BreakOnWeightlessMove = false,
+            DistanceThreshold = 1.5f
+        };
+
         _doAfterSystem.TryStartDoAfter(doAfterArgs);
     }
 
@@ -213,7 +220,7 @@ public sealed partial class ActivateTCPAbilityDoAfterEvent : DoAfterEvent
 {
     public float Strength { get; }
 
-    public override ActivateTCPAbilityDoAfterEvent Clone() => this;
+    public override DoAfterEvent Clone() => this;
 
     public ActivateTCPAbilityDoAfterEvent(float strength)
     {
