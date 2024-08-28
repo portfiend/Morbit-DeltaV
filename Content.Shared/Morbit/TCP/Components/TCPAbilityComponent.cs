@@ -33,7 +33,7 @@ public sealed partial class TCPAbilityComponent : Component
     /// <summary>
     ///     Entities that hold an ability component, and respond to ability events.
     /// </summary>
-    public Container AbilityHolders = new();
+    public Container AbilityHolders = default!;
 
     /// <summary>
     ///     Entities currently affected by this ability.
@@ -44,4 +44,5 @@ public sealed partial class TCPAbilityComponent : Component
     ///     The prototype that will be used as our ability holder.
     /// </summary>
     public EntProtoId HolderProtoId = "TCPAbilityHolder";
+    public string ContainerKey = "tcpAbility";
 }

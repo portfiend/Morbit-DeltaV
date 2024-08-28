@@ -41,6 +41,8 @@ public abstract class SharedTCPAbilitySystem : EntitySystem
 
     private void OnInit(EntityUid uid, TCPAbilityComponent component, MapInitEvent args)
     {
+        component.AbilityHolders = _containerSystem.EnsureContainer<Container>(uid, component.ContainerKey);
+
         LoadAbilityTrigger(uid, component);
         LoadAbilityEffects(component);
     }
