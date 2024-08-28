@@ -1,3 +1,4 @@
+using System.Linq;
 using Content.Shared.DoAfter;
 using Content.Shared.Morbit.TCP.Abilities.Events;
 using Content.Shared.Morbit.TCP.Components;
@@ -209,7 +210,7 @@ public abstract class SharedTCPAbilitySystem : EntitySystem
         if (!Resolve(uid, ref component))
             return;
 
-        var affectedEntities = component.AffectedEntities;
+        var affectedEntities = component.AffectedEntities.ToList();
         foreach (var ent in affectedEntities)
             DeactivateTCPAbility(uid, component, uid, ent);
     }
