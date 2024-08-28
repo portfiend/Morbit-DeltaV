@@ -3,6 +3,7 @@ using Content.Shared.Actions;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.Morbit.TCP.Abilities.Events;
 using Content.Shared.Morbit.TCP.Components;
 using Content.Shared.Morbit.TCP.Prototypes;
 using Robust.Shared.Prototypes;
@@ -171,19 +172,26 @@ public sealed class ActiveAscensionAbility : TCPAbilityType, ITCPToggleableAbili
             return;
 
         Enabled = !Enabled;
+        EntityEventArgs ev;
 
-        if (!Enabled)
+        if (Enabled)
+        {
+            var action = LoadAbilityAction(0.0f, ABILITY_ACTION_PROTOTYPE);
+            AbilityAction = action;
+            ev = new TCPAscendedEvent();
+        }
+        else
         {
             Deactivate();
-            return;
+            ev = new TCPDescendedEvent();
         }
 
-        var action = LoadAbilityAction(0.0f, ABILITY_ACTION_PROTOTYPE);
-        AbilityAction = action;
+        Entities.EventBus.RaiseLocalEvent(User, ev);
     }
 
     public void Deactivate()
     {
+        Enabled = false;
         RemoveAbilityAction();
     }
 

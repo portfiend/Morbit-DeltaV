@@ -34,6 +34,9 @@ public abstract class SharedTCPAbilitySystem : EntitySystem
 
         // DoAfter events
         SubscribeLocalEvent<TCPAbilityComponent, ActivateTCPAbilityDoAfterEvent>(OnDoAfterUseAbility);
+
+        // Entity events
+        SubscribeLocalEvent<TCPAbilityComponent, TCPDescendedEvent>(OnTCPDescended);
     }
 
     private void OnInit(EntityUid uid, TCPAbilityComponent component, MapInitEvent args)
@@ -151,6 +154,11 @@ public abstract class SharedTCPAbilitySystem : EntitySystem
         var doAfterEvent = new ActivateTCPAbilityDoAfterEvent(strength);
         var doAfterArgs = new DoAfterArgs(EntityManager, user, TimeSpan.FromSeconds(delaySeconds), doAfterEvent, target, user);
         _doAfterSystem.TryStartDoAfter(doAfterArgs);
+    }
+
+    private void OnTCPDescended(EntityUid uid, TCPAbilityComponent component, TCPDescendedEvent args)
+    {
+        DeactivateTCPAbilityForAll(uid, component);
     }
 
     private void ActivateTCPAbility(EntityUid uid,

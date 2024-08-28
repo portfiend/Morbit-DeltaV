@@ -48,3 +48,5 @@ public sealed partial class TCPAbilityDeactivatedEvent : TCPAbilityEvent
 
 public sealed partial class TCPAscendedEvent : EntityEventArgs
 { }
+public sealed partial class TCPDescendedEvent : EntityEventArgs
+{ }
