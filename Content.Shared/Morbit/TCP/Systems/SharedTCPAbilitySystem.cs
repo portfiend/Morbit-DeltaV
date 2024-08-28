@@ -4,6 +4,7 @@ using Content.Shared.Morbit.TCP.Components;
 using Content.Shared.Morbit.TCP.Prototypes;
 using Robust.Shared.Containers;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
 
 namespace Content.Shared.Morbit.TCP.Systems;
 
@@ -198,6 +199,7 @@ public abstract class SharedTCPAbilitySystem : EntitySystem
     }
 }
 
+[Serializable, NetSerializable]
 public sealed partial class ActivateTCPAbilityDoAfterEvent : DoAfterEvent
 {
     public float Strength { get; }
