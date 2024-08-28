@@ -1,0 +1,8 @@
+- type: tcpAbility
+  id: Astronaut
+  components:
+    Default:
+    - type: ApplyComponentAbility
+      components:
+      - type: MovementIgnoreGravity
+        gravityState: true
