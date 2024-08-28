@@ -1,13 +1,18 @@
 using Content.Shared.DoAfter;
 using Content.Shared.Morbit.TCP.Abilities.Events;
 using Content.Shared.Morbit.TCP.Components;
+using Content.Shared.Morbit.TCP.Prototypes;
+using Robust.Shared.Containers;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Morbit.TCP.Systems;
 
 public abstract class SharedTCPAbilitySystem : EntitySystem
 {
-    [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
+    [Dependency] private readonly SharedContainerSystem _containerSystem = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfterSystem = default!;
+    [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
+    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
 
     private EntityQuery<TransformComponent> _xformQuery;
 
@@ -33,27 +38,56 @@ public abstract class SharedTCPAbilitySystem : EntitySystem
 
     private void OnInit(EntityUid uid, TCPAbilityComponent component, MapInitEvent args)
     {
-        LoadAbility(uid, component);
+        LoadAbilityTrigger(uid, component);
+        LoadAbilityEffects(uid, component);
     }
 
     private void OnShutdown(EntityUid uid, TCPAbilityComponent component, ComponentShutdown args)
     {
-        UnloadAbility(component);
+        UnloadAbilityTrigger(component);
+        UnloadAbilityEffects(component);
     }
 
-    private void LoadAbility(EntityUid uid, TCPAbilityComponent component)
+    private void LoadAbilityTrigger(EntityUid uid, TCPAbilityComponent component)
     {
         if (component.AbilityTypeClass != null)
-            UnloadAbility(component);
+            UnloadAbilityTrigger(component);
 
         component.AbilityTypeClass = TCPAbilityTypeFactory.CreateAbilityType(component.AbilityTrigger, uid);
         component.AbilityTypeClass?.Load();
     }
 
-    private void UnloadAbility(TCPAbilityComponent component)
+    private void UnloadAbilityTrigger(TCPAbilityComponent component)
     {
         component.AbilityTypeClass?.Unload();
         component.AbilityTypeClass = null;
+    }
+
+    private void LoadAbilityEffects(EntityUid uid, TCPAbilityComponent component)
+    {
+        if (component.AbilityHolders.ContainedEntities.Count > 0)
+            UnloadAbilityEffects(component);
+
+        foreach (var protoId in component.Abilities)
+        {
+            if (!_prototypeManager.TryIndex(protoId, out var ability))
+                continue;
+
+            var comps = ability.Components[component.AbilityTrigger];
+            var holder = EntityManager.Spawn(component.HolderProtoId);
+            EntityManager.AddComponents(holder, comps);
+            _containerSystem.Insert(holder, component.AbilityHolders);
+        }
+    }
+
+    private void UnloadAbilityEffects(TCPAbilityComponent component)
+    {
+        var abilityHolders = component.AbilityHolders.ContainedEntities;
+        foreach (var holder in abilityHolders)
+        {
+            _containerSystem.TryRemoveFromContainer(holder, force: true);
+            QueueDel(holder);
+        }
     }
 
     private void OnToggleStatusAbility(EntityUid uid, TCPAbilityComponent component, ToggleStatusAbilityEvent args)
