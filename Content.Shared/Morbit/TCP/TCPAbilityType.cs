@@ -173,21 +173,18 @@ public sealed class ActiveAscensionAbility : TCPAbilityType, ITCPToggleableAbili
             return;
 
         Enabled = !Enabled;
-        EntityEventArgs ev;
 
         if (Enabled)
         {
             var action = LoadAbilityAction(0.0f, ABILITY_PULSE_TARGETED_PROTOTYPE);
             AbilityAction = action;
-            ev = new TCPAscendedEvent();
+            Entities.EventBus.RaiseLocalEvent(User, new TCPAscendedEvent());
         }
         else
         {
             Deactivate();
-            ev = new TCPDescendedEvent();
+            Entities.EventBus.RaiseLocalEvent(User, new TCPDescendedEvent());
         }
-
-        Entities.EventBus.RaiseLocalEvent(User, ev);
     }
 
     public void Deactivate()
