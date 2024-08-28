@@ -10,7 +10,7 @@
   skinColoration: Hues
   maleFirstNames: names_tcp_male
   femaleFirstNames: names_tcp_female
-  naming: FirstDashFirst
+  naming: FirstLast
   subspeciesName: species-name-tcp-basic
   sexes:
   - Unsexed

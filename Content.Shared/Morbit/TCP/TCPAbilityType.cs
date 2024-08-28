@@ -131,7 +131,7 @@ public abstract partial class TCPAbilityType : ITCPAbilityType
 
         if (comps != null)
             return comps;
-        
+
         tcpAbility.Components.TryGetValue(TCPAbilityTrigger.Default, out var defaultComps);
         return defaultComps;
     }
