@@ -1,0 +1,8 @@
+- type: entity
+  id: TCPAbilityHolder
+  name: TCP Ability
+  description: An ability used by a TCP.
+  save: false
+  noSpawn: true
+  components:
+  - type: Transform
