@@ -39,7 +39,7 @@ public abstract class SharedTCPAbilitySystem : EntitySystem
     private void OnInit(EntityUid uid, TCPAbilityComponent component, MapInitEvent args)
     {
         LoadAbilityTrigger(uid, component);
-        LoadAbilityEffects(uid, component);
+        LoadAbilityEffects(component);
     }
 
     private void OnShutdown(EntityUid uid, TCPAbilityComponent component, ComponentShutdown args)
@@ -63,7 +63,7 @@ public abstract class SharedTCPAbilitySystem : EntitySystem
         component.AbilityTypeClass = null;
     }
 
-    private void LoadAbilityEffects(EntityUid uid, TCPAbilityComponent component)
+    private void LoadAbilityEffects(TCPAbilityComponent component)
     {
         if (component.AbilityHolders.ContainedEntities.Count > 0)
             UnloadAbilityEffects(component);
@@ -73,7 +73,11 @@ public abstract class SharedTCPAbilitySystem : EntitySystem
             if (!_prototypeManager.TryIndex(protoId, out var ability))
                 continue;
 
-            var comps = ability.Components[component.AbilityTrigger];
+            ability.Components.TryGetValue(component.AbilityTrigger, out var comps);
+
+            if (comps == null)
+                continue;
+
             var holder = EntityManager.Spawn(component.HolderProtoId);
             EntityManager.AddComponents(holder, comps);
             _containerSystem.Insert(holder, component.AbilityHolders);
