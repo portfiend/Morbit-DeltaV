@@ -142,6 +142,7 @@ public abstract partial class TCPAbilityType : ITCPAbilityType
 public sealed class ActiveAscensionAbility : TCPAbilityType, ITCPToggleableAbilityType
 {
     private const string ASCEND_ACTION_PROTOTYPE = "ActionTCPAscend";
+    private const string ABILITY_PULSE_TARGETED_PROTOTYPE = "ActionTCPAbilityTargeted";
     public bool Enabled { get; private set; } = false;
     public EntityUid? AbilityAction = null;
 
@@ -176,7 +177,7 @@ public sealed class ActiveAscensionAbility : TCPAbilityType, ITCPToggleableAbili
 
         if (Enabled)
         {
-            var action = LoadAbilityAction(0.0f, ABILITY_ACTION_PROTOTYPE);
+            var action = LoadAbilityAction(0.0f, ABILITY_PULSE_TARGETED_PROTOTYPE);
             AbilityAction = action;
             ev = new TCPAscendedEvent();
         }
