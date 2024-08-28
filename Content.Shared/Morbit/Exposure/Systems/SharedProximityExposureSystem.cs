@@ -6,7 +6,6 @@ namespace Content.Shared.Morbit.Exposure.Systems;
 
 public sealed partial class SharedProximityExposureSystem : EntitySystem
 {
-    [Dependency] private readonly IEntityManager _entityManager = default!;
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly IGameTiming _gameTiming = default!;
     private EntityQuery<TransformComponent> _xformQuery;
