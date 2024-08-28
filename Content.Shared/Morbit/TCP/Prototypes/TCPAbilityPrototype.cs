@@ -14,9 +14,4 @@ public sealed partial class TCPAbilityPrototype : IPrototype
     /// </summary>
     [DataField]
     public Dictionary<TCPAbilityTrigger, ComponentRegistry> Components = new();
-
-    /// <summary>
-    ///     Entities currently affected by this ability.
-    /// </summary>
-    public List<EntityUid> AffectedEntities = new();
 }

@@ -22,14 +22,14 @@ public abstract partial class TCPAbilityEvent : EntityEventArgs
     }
 }
 
-public sealed partial class TCPAbilityActivated : TCPAbilityEvent
+public sealed partial class TCPAbilityActivatedEvent : TCPAbilityEvent
 {
     /// <summary>
     ///     The severity of the effect.
     /// </summary>
     public readonly float Strength;
 
-    public TCPAbilityActivated(EntityUid user,
+    public TCPAbilityActivatedEvent(EntityUid user,
         EntityUid? target,
         float strength)
         : base(user, target)
@@ -38,10 +38,13 @@ public sealed partial class TCPAbilityActivated : TCPAbilityEvent
     }
 }
 
-public sealed partial class TCPAbilityDeactivated : TCPAbilityEvent
+public sealed partial class TCPAbilityDeactivatedEvent : TCPAbilityEvent
 {
-    public TCPAbilityDeactivated(EntityUid user,
+    public TCPAbilityDeactivatedEvent(EntityUid user,
         EntityUid? target)
         : base(user, target)
     { }
 }
+
+public sealed partial class TCPAscendedEvent : EntityEventArgs
+{ }

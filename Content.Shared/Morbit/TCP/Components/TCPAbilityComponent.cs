@@ -36,6 +36,11 @@ public sealed partial class TCPAbilityComponent : Component
     public Container AbilityHolders = new();
 
     /// <summary>
+    ///     Entities currently affected by this ability.
+    /// </summary>
+    public List<EntityUid> AffectedEntities = new();
+
+    /// <summary>
     ///     The prototype that will be used as our ability holder.
     /// </summary>
     public EntProtoId HolderProtoId = "TCPAbilityHolder";

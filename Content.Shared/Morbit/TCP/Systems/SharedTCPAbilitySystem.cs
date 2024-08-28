@@ -162,9 +162,29 @@ public abstract class SharedTCPAbilitySystem : EntitySystem
         if (!Resolve(uid, ref component))
             return;
 
-        var abilityEvent = new TCPAbilityActivated(user, target, strength);
+        var abilityEvent = new TCPAbilityActivatedEvent(user, target, strength);
         foreach (var holder in component.AbilityHolders.ContainedEntities)
             RaiseLocalEvent(holder, abilityEvent);
+    }
+
+    private void DeactivateTCPAbility(EntityUid uid, TCPAbilityComponent? component, EntityUid user, EntityUid? target = null)
+    {
+        if (!Resolve(uid, ref component))
+            return;
+
+        var abilityEvent = new TCPAbilityDeactivatedEvent(user, target);
+        foreach (var holder in component.AbilityHolders.ContainedEntities)
+            RaiseLocalEvent(holder, abilityEvent);
+    }
+
+    private void DeactivateTCPAbilityForAll(EntityUid uid, TCPAbilityComponent? component)
+    {
+        if (!Resolve(uid, ref component))
+            return;
+
+        var affectedEntities = component.AffectedEntities;
+        foreach (var ent in affectedEntities)
+            DeactivateTCPAbility(uid, component, uid, ent);
     }
 }
 
