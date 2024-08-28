@@ -35,7 +35,7 @@ public abstract partial class TCPAbilityType : ITCPAbilityType
 
     protected EntityUid User;
 
-    public TCPAbilityType(EntityUid user)
+    protected TCPAbilityType(EntityUid user)
     {
         User = user;
         Entities = IoCManager.Resolve<IEntityManager>();
