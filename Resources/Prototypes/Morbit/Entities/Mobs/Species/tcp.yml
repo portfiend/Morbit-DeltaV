@@ -1,16 +1,24 @@
 - type: entity
   save: false
   name: Urist McTCP
+  id: BaseMobTCPAppearance
+  abstract: true
+  components:
+  - type: HumanoidAppearance
+    species: TinyCatPerson
+
+- type: entity
+  save: false
+  name: Urist McTCP
   parent:
   - BaseMobSpeciesOrganicNoRespirator
   - MobTCPBaseHealthGreat
+  - BaseMobTCPAppearance
   id: BaseMobTCP
   abstract: true
   components:
   - type: Sprite
     scale: 0.4, 0.4
-  - type: HumanoidAppearance
-    species: TinyCatPerson
   - type: Carriable
     pickupDuration: 5 # Slightly higher, so it takes more time for complexes
   - type: Icon
@@ -38,10 +46,9 @@
     maximumSize: Normal
 
 - type: entity
-  parent: BaseSpeciesDummy
+  parent:
+  - BaseSpeciesDummy
+  - BaseMobTCPAppearance
   id: MobTCPDummy
   noSpawn: true
-  description: A dummy tcp meant to be used in character setup.
-  components:
-  - type: HumanoidAppearance
-    species: TinyCatPerson
+  description: A dummy TCP meant to be used in character setup.

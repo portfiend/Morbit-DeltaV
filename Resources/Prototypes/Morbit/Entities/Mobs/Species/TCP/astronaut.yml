@@ -1,14 +1,29 @@
 - type: entity
   save: false
+  name: Urist McTCP
+  id: BaseMobTCPAstronautAppearance
+  abstract: true
+  components:
+  - type: HumanoidAppearance
+    species: TinyCatPerson
+  - type: Inventory
+    displacements:
+      jumpsuit:
+        sizeMaps:
+          32:
+            sprite: Morbit/Mobs/Species/TCP/Typings/Astronaut/displacement.rsi
+            state: jumpsuit
+
+- type: entity
+  save: false
   name: Urist McAstronautType
   parent:
   - BaseMobTCP
   - MobTCPBaseHealthGood
+  - BaseMobTCPAstronautAppearance
   id: BaseMobTCPAstronaut
   abstract: true
   components:
-  - type: HumanoidAppearance
-    species: TCPAstronaut
   - type: Icon
     sprite: Morbit/Mobs/Species/TCP/Typings/Astronaut/parts.rsi
     state: full
@@ -18,9 +33,8 @@
     - Astronaut
 
 - type: entity
-  parent: MobTCPDummy
+  parent: 
+  - MobTCPDummy
+  - BaseMobTCPAstronautAppearance
   id: MobTCPAstronautDummy
-  noSpawn: true
-  components:
-  - type: HumanoidAppearance
-    species: TCPAstronaut
+  noSpawn: True
