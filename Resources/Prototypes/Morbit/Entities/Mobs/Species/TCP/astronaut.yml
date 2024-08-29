@@ -5,7 +5,7 @@
   abstract: true
   components:
   - type: HumanoidAppearance
-    species: TinyCatPerson
+    species: TCPAstronaut
   - type: Inventory
     displacements:
       jumpsuit:
