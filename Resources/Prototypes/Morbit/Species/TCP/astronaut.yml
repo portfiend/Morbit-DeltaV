@@ -2,13 +2,13 @@
   parent: TinyCatPerson
   id: TCPAstronaut
   masterSpecies: TinyCatPerson
-  name: species-name-tcp-creature-astronaut
+  name: species-name-tcp-astronaut
   roundStart: true
   prototype: MobTCPAstronaut
   sprites: MobTCPAstronautSprites
   markingLimits: MobTCPAstronautMarkingLimits
   dollPrototype: MobTCPAstronautDummy
-  subspeciesName: species-name-tcp-creature-astronaut
+  subspeciesName: species-name-tcp-astronaut
 
 - type: speciesBaseSprites
   id: MobTCPAstronautSprites
