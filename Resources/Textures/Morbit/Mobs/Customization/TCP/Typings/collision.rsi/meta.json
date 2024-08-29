@@ -1,18 +1,18 @@
 {
     "version": 1,
     "license": "CC-BY-SA-4.0",
-    "copyright": "Sprited by Vyn (portfiend)",
+    "copyright": "skinstealer, edited by portfiend, species concept by Homebrew Deviants",
     "size": {
         "x": 32,
         "y": 32
     },
     "states": [
         {
-            "name": "basic",
+            "name": "head",
             "directions": 4
         },
         {
-            "name": "basic_right",
+            "name": "torso",
             "directions": 4
         }
     ]

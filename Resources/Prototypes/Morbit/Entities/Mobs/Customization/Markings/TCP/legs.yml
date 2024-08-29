@@ -20,3 +20,34 @@
     state: l_foot
   - sprite: Morbit/Mobs/Species/TCP/Typings/Astronaut/parts.rsi
     state: r_foot
+
+# Collision
+
+- type: marking
+  parent: TCPLegsBase
+  id: TCPLegsCollision
+  coloring:
+    layers:
+      r_leg:
+        type:
+          !type:SecondaryColoring
+  sprites:
+  - sprite: Morbit/Mobs/Species/TCP/parts.rsi
+    state: l_leg
+  - sprite: Morbit/Mobs/Species/TCP/parts.rsi
+    state: r_leg
+
+- type: marking
+  parent: TCPLegsBase
+  id: TCPFeetCollision
+  coloring:
+    layers:
+      r_foot:
+        type:
+          !type:SecondaryColoring
+  bodyPart: RFoot
+  sprites:
+  - sprite: Morbit/Mobs/Species/TCP/parts.rsi
+    state: l_foot
+  - sprite: Morbit/Mobs/Species/TCP/parts.rsi
+    state: r_foot

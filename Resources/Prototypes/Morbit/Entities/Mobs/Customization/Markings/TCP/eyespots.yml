@@ -1,0 +1,23 @@
+- type: marking
+  abstract: true
+  parent: TCPMarkingBase
+  id: TCPEyespotBase
+  bodyPart: HeadTop
+  markingCategory: Overlay
+
+- type: marking
+  parent: TCPEyespotBase
+  id: TCPEyespotsGoogly
+  coloring:
+    layers:
+      googly_base:
+        type:
+          !type:TertiaryColoring
+      googly_dots:
+        type:
+          !type:EyeColoring
+  sprites:
+  - sprite: Morbit/Mobs/Customization/TCP/eyespots.rsi
+    state: googly_base
+  - sprite: Morbit/Mobs/Customization/TCP/eyespots.rsi
+    state: googly_dots

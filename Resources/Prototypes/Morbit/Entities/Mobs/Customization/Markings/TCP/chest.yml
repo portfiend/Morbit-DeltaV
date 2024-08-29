@@ -38,3 +38,16 @@
   sprites:
   - sprite: Morbit/Mobs/Customization/TCP/Typings/astronaut.rsi
     state: pack
+
+# Collision
+
+- type: marking
+  parent: TCPChestBase
+  id: TCPChestCollision
+  coloring:
+    default:
+      type:
+        !type:SecondaryColoring
+  sprites:
+  - sprite: Morbit/Mobs/Customization/TCP/Typings/collision.rsi
+    state: torso

@@ -1,0 +1,30 @@
+- type: entity
+  save: false
+  name: Urist McTCP
+  id: BaseMobTCPCollisionAppearance
+  abstract: true
+  components:
+  - type: HumanoidAppearance
+    species: TinyCatPerson
+
+- type: entity
+  save: false
+  name: Urist McCollisionType
+  parent:
+  - BaseMobTCP
+  - MobTCPBaseHealthGood
+  - BaseMobTCPCollisionAppearance
+  id: BaseMobTCPCollision
+  abstract: true
+  components:
+  - type: Icon
+    sprite: Morbit/Mobs/Species/TCP/Typings/Collision/parts.rsi
+    state: full
+  - type: TCPAbility
+
+- type: entity
+  parent: 
+  - MobTCPDummy
+  - BaseMobTCPCollisionAppearance
+  id: MobTCPCollisionDummy
+  noSpawn: True

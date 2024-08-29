@@ -2,8 +2,10 @@
   abstract: true
   parent: TCPMarkingBase
   id: TCPHeadBase
-  bodyPart: HeadTop
+  bodyPart: HeadSide
   markingCategory: Head
+
+# Astronaut
 
 - type: marking
   parent: TCPHeadBase
@@ -26,3 +28,16 @@
   sprites:
   - sprite: Morbit/Mobs/Customization/TCP/Typings/astronaut.rsi
     state: helmet
+
+# Collision
+
+- type: marking
+  parent: TCPHeadBase
+  id: TCPHeadCollision
+  coloring:
+    default:
+      type:
+        !type:SecondaryColoring
+  sprites:
+  - sprite: Morbit/Mobs/Customization/TCP/Typings/collision.rsi
+    state: head

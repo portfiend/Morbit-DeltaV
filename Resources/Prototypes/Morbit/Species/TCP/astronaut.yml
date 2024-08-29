@@ -41,7 +41,7 @@
       required: false
     Head:
       points: 5
-      required: true
+      required: false
       defaultMarkings: [ TCPHeadAstronautHelmet, TCPHeadAstronautFace ]
     HeadTop: # earnubs
       points: 1
@@ -49,15 +49,15 @@
       defaultMarkings: [ TCPEarnubsBasic ]
     Chest:
       points: 5
-      required: true
+      required: false
       defaultMarkings: [ TCPChestAstronautStraps, TCPChestAstronautPack ]
     Legs:
       points: 5
-      required: true
+      required: false
       defaultMarkings: [ TCPFeetAstronautBoots ]
     Arms:
       points: 5
-      required: true
+      required: false
       defaultMarkings: [ TCPHandsBasicTertiary ]
 
 - type: humanoidBaseSprite

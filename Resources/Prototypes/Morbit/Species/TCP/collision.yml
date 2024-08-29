@@ -1,0 +1,46 @@
+- type: species
+  parent: TinyCatPerson
+  id: TCPCollision
+  masterSpecies: TinyCatPerson
+  name: species-name-tcp-collision
+  roundStart: true
+  prototype: MobTCPCollision
+  sprites: MobTCPSprites
+  markingLimits: MobTCPCollisionMarkingLimits
+  dollPrototype: MobTCPCollisionDummy
+  subspeciesName: species-name-tcp-collision
+
+- type: markingPoints
+  id: MobTCPCollisionMarkingLimits
+  onlyWhitelisted: true
+  points:
+    Hair:
+      points: 0
+      required: false
+    FacialHair:
+      points: 0
+      required: false
+    Head:
+      points: 5
+      required: false
+      defaultMarkings: [ TCPHeadCollision ]
+    HeadTop: # earnubs
+      points: 1
+      required: true
+      defaultMarkings: [ TCPEarnubsCollision ]
+    Chest:
+      points: 5
+      required: false
+      defaultMarkings: [ TCPChestCollision ]
+    Arms:
+      points: 5
+      required: false
+      defaultMarkings: [ TCPArmsCollision, TCPHandsCollision ]
+    Legs:
+      points: 5
+      required: false
+      defaultMarkings: [ TCPLegsCollision, TCPFeetCollision ]
+    Overlay:
+      points: 100
+      required: false
+      defaultMarkings: [ TCPEyespotsGoogly ]
