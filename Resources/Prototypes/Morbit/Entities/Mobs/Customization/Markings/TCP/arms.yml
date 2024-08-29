@@ -37,13 +37,10 @@
   parent: TCPArmsBase
   id: TCPArmsCollision
   coloring:
-    layers:
-      r_arm:
-        type:
-          !type:SecondaryColoring
+    default:
+      type:
+        !type:SecondaryColoring
   sprites:
-  - sprite: Morbit/Mobs/Species/TCP/parts.rsi
-    state: l_arm
   - sprite: Morbit/Mobs/Species/TCP/parts.rsi
     state: r_arm
 
@@ -52,12 +49,9 @@
   id: TCPHandsCollision
   bodyPart: RHand
   coloring:
-    layers:
-      r_hand:
-        type:
-          !type:SecondaryColoring
+    default:
+      type:
+        !type:SecondaryColoring
   sprites:
-  - sprite: Morbit/Mobs/Species/TCP/parts.rsi
-    state: l_hand
   - sprite: Morbit/Mobs/Species/TCP/parts.rsi
     state: r_hand
