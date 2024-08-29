@@ -1,0 +1,28 @@
+- type: marking
+  abstract: true
+  parent: TCPMarkingBase
+  id: TCPHeadBase
+  bodyPart: HeadTop
+  markingCategory: Head
+
+- type: marking
+  parent: TCPHeadBase
+  id: TCPHeadAstronautFace
+  coloring:
+    default:
+      type:
+        !type:TattooColoring
+  sprites:
+  - sprite: Morbit/Mobs/Customization/TCP/Typings/astronaut.rsi
+    state: face
+
+- type: marking
+  parent: TCPHeadBase
+  id: TCPHeadAstronautHelmet
+  coloring:
+    default:
+      type:
+        !type:SecondaryColoring
+  sprites:
+  - sprite: Morbit/Mobs/Customization/TCP/Typings/astronaut.rsi
+    state: helmet

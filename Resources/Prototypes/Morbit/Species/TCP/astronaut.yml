@@ -1,0 +1,145 @@
+- type: species
+  parent: TinyCatPerson
+  id: TCPAstronaut
+  masterSpecies: TinyCatPerson
+  name: species-name-tcp-creature-astronaut
+  roundStart: true
+  prototype: MobTCPAstronaut
+  sprites: MobTCPAstronautSprites
+  markingLimits: MobTCPAstronautMarkingLimits
+  dollPrototype: MobTCPAstronautDummy
+  subspeciesName: species-name-tcp-creature-astronaut
+
+- type: speciesBaseSprites
+  id: MobTCPAstronautSprites
+  sprites:
+    Head: MobTCPAstronautHead
+    Snout: MobHumanoidAnyMarking
+    Chest: MobTCPAstronautTorso
+    HeadTop: MobHumanoidAnyMarking
+    HeadSide: MobHumanoidAnyMarking
+    Tail: MobHumanoidAnyMarking
+    Eyes: MobHumanoidEyes
+    LArm: MobTCPAstronautLArm
+    RArm: MobTCPAstronautRArm
+    LHand: MobTCPAstronautLHand
+    RHand: MobTCPAstronautRHand
+    LLeg: MobTCPAstronautLLeg
+    RLeg: MobTCPAstronautRLeg
+    LFoot: MobTCPAstronautLFoot
+    RFoot: MobTCPAstronautRFoot
+
+- type: markingPoints
+  id: MobTCPAstronautMarkingLimits
+  onlyWhitelisted: true
+  points:
+    Hair:
+      points: 0
+      required: false
+    FacialHair:
+      points: 0
+      required: false
+    Head:
+      points: 5
+      required: true
+      defaultMarkings: [ TCPHeadAstronautHelmet, TCPHeadAstronautFace ]
+    HeadTop: # earnubs
+      points: 1
+      required: true
+      defaultMarkings: [ TCPEarnubsBasic ]
+    Chest:
+      points: 5
+      required: true
+      defaultMarkings: [ TCPChestAstronautStraps, TCPChestAstronautPack ]
+    Legs:
+      points: 5
+      required: true
+      defaultMarkings: [ TCPFeetAstronautBoots ]
+    Arms:
+      points: 5
+      required: true
+      defaultMarkings: [ TCPHandsBasicTertiary ]
+
+- type: humanoidBaseSprite
+  id: MobTCPAstronautHead
+  baseSprite:
+    sprite: Morbit/Mobs/Species/TCP/Typings/Astronaut/parts.rsi
+    state: head
+
+- type: humanoidBaseSprite
+  id: MobTCPAstronautHeadMale
+  baseSprite:
+    sprite: Morbit/Mobs/Species/TCP/Typings/Astronaut/parts.rsi
+    state: head
+
+- type: humanoidBaseSprite
+  id: MobTCPAstronautHeadFemale
+  baseSprite:
+    sprite: Morbit/Mobs/Species/TCP/Typings/Astronaut/parts.rsi
+    state: head
+
+- type: humanoidBaseSprite
+  id: MobTCPAstronautTorso
+  baseSprite:
+    sprite: Morbit/Mobs/Species/TCP/Typings/Astronaut/parts.rsi
+    state: torso
+
+- type: humanoidBaseSprite
+  id: MobTCPAstronautTorsoMale
+  baseSprite:
+    sprite: Morbit/Mobs/Species/TCP/Typings/Astronaut/parts.rsi
+    state: torso
+
+- type: humanoidBaseSprite
+  id: MobTCPAstronautTorsoFemale
+  baseSprite:
+    sprite: Morbit/Mobs/Species/TCP/Typings/Astronaut/parts.rsi
+    state: torso
+
+- type: humanoidBaseSprite
+  id: MobTCPAstronautLLeg
+  baseSprite:
+    sprite: Morbit/Mobs/Species/TCP/Typings/Astronaut/parts.rsi
+    state: l_leg
+
+- type: humanoidBaseSprite
+  id: MobTCPAstronautLHand
+  baseSprite:
+    sprite: Morbit/Mobs/Species/TCP/Typings/Astronaut/parts.rsi
+    state: l_hand
+
+- type: humanoidBaseSprite
+  id: MobTCPAstronautLArm
+  baseSprite:
+    sprite: Morbit/Mobs/Species/TCP/Typings/Astronaut/parts.rsi
+    state: l_arm
+
+- type: humanoidBaseSprite
+  id: MobTCPAstronautLFoot
+  baseSprite:
+    sprite: Morbit/Mobs/Species/TCP/Typings/Astronaut/parts.rsi
+    state: l_foot
+
+- type: humanoidBaseSprite
+  id: MobTCPAstronautRLeg
+  baseSprite:
+    sprite: Morbit/Mobs/Species/TCP/Typings/Astronaut/parts.rsi
+    state: r_leg
+
+- type: humanoidBaseSprite
+  id: MobTCPAstronautRHand
+  baseSprite:
+    sprite: Morbit/Mobs/Species/TCP/Typings/Astronaut/parts.rsi
+    state: r_hand
+
+- type: humanoidBaseSprite
+  id: MobTCPAstronautRArm
+  baseSprite:
+    sprite: Morbit/Mobs/Species/TCP/Typings/Astronaut/parts.rsi
+    state: r_arm
+
+- type: humanoidBaseSprite
+  id: MobTCPAstronautRFoot
+  baseSprite:
+    sprite: Morbit/Mobs/Species/TCP/Typings/Astronaut/parts.rsi
+    state: r_foot

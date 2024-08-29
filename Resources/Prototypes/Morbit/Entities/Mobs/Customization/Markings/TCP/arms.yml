@@ -1,0 +1,32 @@
+- type: marking
+  abstract: true
+  parent: TCPMarkingBase
+  id: TCPArmsBase
+  bodyPart: RArm
+  markingCategory: Arms
+
+- type: marking
+  parent: TCPArmsBase
+  id: TCPHandsBasic
+  bodyPart: RHand
+  sprites:
+  - sprite: Morbit/Mobs/Species/TCP/parts.rsi
+    state: l_hand
+  - sprite: Morbit/Mobs/Species/TCP/parts.rsi
+    state: r_hand
+
+- type: marking
+  parent: TCPHandsBasic
+  id: TCPHandsBasicSecondary
+  coloring:
+    default:
+      type:
+        !type:SecondaryColoring
+
+- type: marking
+  parent: TCPHandsBasic
+  id: TCPHandsBasicTertiary
+  coloring:
+    default:
+      type:
+        !type:TertiaryColoring

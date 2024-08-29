@@ -1,0 +1,5 @@
+- type: marking
+  abstract: true
+  id: TCPMarkingBase
+  speciesRestriction: [ TinyCatPerson ]
+  sprites: []

@@ -1,0 +1,22 @@
+- type: marking
+  abstract: true
+  parent: TCPMarkingBase
+  id: TCPLegsBase
+  bodyPart: RLeg
+  markingCategory: Legs
+
+# Astronaut
+
+- type: marking
+  parent: TCPLegsBase
+  id: TCPFeetAstronautBoots
+  coloring:
+    default:
+      type:
+        !type:TertiaryColoring
+  bodyPart: RFoot
+  sprites:
+  - sprite: Morbit/Mobs/Species/TCP/Typings/Astronaut/parts.rsi
+    state: l_foot
+  - sprite: Morbit/Mobs/Species/TCP/Typings/Astronaut/parts.rsi
+    state: r_foot

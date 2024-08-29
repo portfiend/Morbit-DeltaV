@@ -1,0 +1,26 @@
+- type: entity
+  save: false
+  name: Urist McAstronautType
+  parent:
+  - BaseMobTCP
+  - MobTCPBaseHealthGood
+  id: BaseMobTCPAstronaut
+  abstract: true
+  components:
+  - type: HumanoidAppearance
+    species: TCPAstronaut
+  - type: Icon
+    sprite: Morbit/Mobs/Species/TCP/Typings/Astronaut/parts.rsi
+    state: full
+  - type: TCPAbility
+    abilityTrigger: Passive
+    abilities:
+    - Astronaut
+
+- type: entity
+  parent: MobTCPDummy
+  id: MobTCPAstronautDummy
+  noSpawn: true
+  components:
+  - type: HumanoidAppearance
+    species: TCPAstronaut

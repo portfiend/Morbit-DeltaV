@@ -44,29 +44,10 @@
     FacialHair:
       points: 0
       required: false
-    Tail:
-      points: 1
-      required: false
-    Snout:
-      points: 1
-      required: false
-    # we are using HeadTop for earnubs!
-    HeadTop:
+    HeadTop: # earnubs
       points: 1
       required: true
       defaultMarkings: [ TCPEarnubsBasic ]
-    HeadSide:
-      points: 1
-      required: false
-    Chest:
-      points: 1
-      required: false
-    Legs:
-      points: 1
-      required: false
-    Arms:
-      points: 1
-      required: false
 
 - type: humanoidBaseSprite
   id: MobTCPHead

@@ -7,6 +7,8 @@
   id: BaseMobTCP
   abstract: true
   components:
+  - type: Sprite
+    scale: 0.4, 0.4
   - type: HumanoidAppearance
     species: TinyCatPerson
   - type: Carriable
@@ -33,7 +35,7 @@
     speciesId: tcp
     templateId: tcp
   - type: PickupSizeLimit
-        maximumSize: Normal
+    maximumSize: Normal
 
 - type: entity
   parent: BaseSpeciesDummy

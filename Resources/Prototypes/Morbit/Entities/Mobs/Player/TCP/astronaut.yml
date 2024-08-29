@@ -1,0 +1,5 @@
+- type: entity
+  save: false
+  name: Urist McAstronautType
+  parent: BaseMobTCPAstronaut
+  id: MobTCPAstronaut

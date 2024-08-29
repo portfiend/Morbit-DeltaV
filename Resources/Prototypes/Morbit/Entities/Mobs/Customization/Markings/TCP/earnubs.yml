@@ -1,7 +1,7 @@
 - type: marking
   abstract: true
   id: TCPEarnubsBase
-  bodyPart: HeadTop
+  bodyPart: Head
   markingCategory: HeadTop
   speciesRestriction: [ TinyCatPerson ]
   sprites:

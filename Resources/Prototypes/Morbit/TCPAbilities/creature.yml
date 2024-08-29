@@ -1,6 +1,12 @@
 - type: tcpAbility
   id: Astronaut
   components:
+    PassiveWithPulse:
+    - type: ProximityExposure
+    - type: ApplyComponentAbility
+      components:
+      - type: MovementIgnoreGravity
+        gravityState: true
     Default:
     - type: ApplyComponentAbility
       components:

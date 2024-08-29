@@ -8,19 +8,24 @@
     },
     "states": [
         {
-            "name": "helmet"
+            "name": "helmet",
+            "directions": 4
         },
         {
-            "name": "face"
+            "name": "face",
+            "directions": 4
         },
         {
-            "name": "pack"
+            "name": "pack",
+            "directions": 4
         },
         {
-            "name": "strap"
+            "name": "strap",
+            "directions": 4
         },
         {
-            "name": "strap_buckles"
+            "name": "strap_buckles",
+            "directions": 4
         }
     ]
 }

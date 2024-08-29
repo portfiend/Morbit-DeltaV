@@ -1,0 +1,40 @@
+- type: marking
+  abstract: true
+  parent: TCPMarkingBase
+  id: TCPChestBase
+  bodyPart: Chest
+  coloring:
+    default:
+      type:
+        !type:SecondaryColoring
+  markingCategory: Chest
+
+# Astronaut
+
+- type: marking
+  parent: TCPChestBase
+  id: TCPChestAstronautStraps
+  coloring:
+    layers:
+      strap:
+        type:
+          !type:SecondaryColoring
+      strap_buckles:
+        type:
+          !type:TertiaryColoring
+  sprites:
+  - sprite: Morbit/Mobs/Customization/TCP/Typings/astronaut.rsi
+    state: strap
+  - sprite: Morbit/Mobs/Customization/TCP/Typings/astronaut.rsi
+    state: strap_buckles
+
+- type: marking
+  parent: TCPChestBase
+  id: TCPChestAstronautPack
+  coloring:
+    default:
+      type:
+        !type:SecondaryColoring
+  sprites:
+  - sprite: Morbit/Mobs/Customization/TCP/Typings/astronaut.rsi
+    state: pack
