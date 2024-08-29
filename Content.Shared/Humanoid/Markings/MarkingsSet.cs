@@ -273,12 +273,15 @@ public sealed partial class MarkingSet
 
         foreach (var (category, points) in Points)
         {
-            if (points.Points <= 0 || points.DefaultMarkings.Count <= 0)
+            // Morbit: Remove all default markings if there is any non-default
+            if (points.Points <= 0 || points.DefaultMarkings.Count <= 0
+                || Markings.TryGetValue(category, out var catMarkings) == true && catMarkings.Count > 0)
             {
                 continue;
             }
 
             var index = 0;
+            // Morbit: Fix this loop
             while (points.Points > 0 && index < points.DefaultMarkings.Count)
             {
                 if (markingManager.Markings.TryGetValue(points.DefaultMarkings[index], out var prototype))
