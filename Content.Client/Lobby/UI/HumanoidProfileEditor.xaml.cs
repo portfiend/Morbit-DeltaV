@@ -218,6 +218,7 @@ namespace Content.Client.Lobby.UI
 
             SpeciesButton.OnItemSelected += args =>
             {
+                Logger.GetSawmill("TCP").Debug(args.Id.ToString());
                 SpeciesButton.SelectId(args.Id);
                 SetSpecies(_masterSpecies[args.Id].ID);
                 UpdateSubspeciesList();
@@ -612,13 +613,14 @@ namespace Content.Client.Lobby.UI
             _masterSpecies = _species.Where(o => o.MasterSpecies == null).ToList();
 
             var speciesIds = _masterSpecies.Select(o => o.ID).ToList();
+            var masterSpeciesId = GetMasterSpecies();
 
             for (var i = 0; i < _masterSpecies.Count; i++)
             {
                 var name = Loc.GetString(_masterSpecies[i].Name);
                 SpeciesButton.AddItem(name, i);
 
-                if (Profile?.Species.Equals(_masterSpecies[i].ID) == true)
+                if (masterSpeciesId?.ToString().Equals(_masterSpecies[i].ID) == true)
                 {
                     SpeciesButton.SelectId(i);
                 }
@@ -627,7 +629,8 @@ namespace Content.Client.Lobby.UI
             // If our species isn't available then reset it to default.
             if (Profile != null)
             {
-                if (!speciesIds.Contains(Profile.Species))
+                _prototypeManager.TryIndex(Profile?.Species, out var speciesProto);
+                if (speciesProto == null || !_species.Contains(speciesProto))
                 {
                     SetSpecies(SharedHumanoidAppearanceSystem.DefaultSpecies);
                 }
@@ -1663,10 +1666,18 @@ namespace Content.Client.Lobby.UI
             ExportButton.Disabled = false;
         }
 
+        private ProtoId<SpeciesPrototype>? GetMasterSpecies()
+        {
+            _prototypeManager.TryIndex(Profile?.Species, out var speciesProto);
+            return speciesProto?.MasterSpecies != null
+                ? speciesProto?.MasterSpecies
+                : Profile?.Species;
+        }
+
         // Morbit: Subspecies selector
         private void UpdateSubspeciesList()
         {
-            var masterSpecies = Profile?.Species;
+            var masterSpecies = GetMasterSpecies();
 
             _subSpecies = _species
                 .Where(o => o.MasterSpecies == masterSpecies || o.ID == masterSpecies)
@@ -1684,13 +1695,14 @@ namespace Content.Client.Lobby.UI
                 SubSpeciesButton.AddItem(Loc.GetString(name), i);
             }
 
+            // Select current subspecies
+            _prototypeManager.TryIndex(Profile?.Species, out var speciesProto);
+            int? index = speciesProto != null ? _subSpecies.IndexOf(speciesProto) : null;
+            if (index != null)
+                SubSpeciesButton.SelectId((int)index);
+
             // Hide subspecies picker if there's only one option
             SubSpeciesPicker.Visible = SubSpeciesButton.ItemCount > 1;
-            if (SubSpeciesButton.ItemCount > 0)
-            {
-                SubSpeciesButton.SelectId(0);
-                SetSpecies(_subSpecies[0].ID);
-            }
         }
     }
 }
