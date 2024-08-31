@@ -3,7 +3,7 @@ using Robust.Shared.Serialization;
 namespace Content.Shared.Morbit.TCP.Abilities.Events;
 
 [NetSerializable, Serializable]
-public abstract partial class TCPAbilityEvent : EntityEventArgs
+public abstract partial class TCPAbilityEvent : HandledEntityEventArgs
 {
     /// <summary>
     ///     The TCP using this ability.
@@ -13,7 +13,7 @@ public abstract partial class TCPAbilityEvent : EntityEventArgs
     /// <summary>
     ///     The target entity.
     /// </summary>
-    public readonly EntityUid? Target;
+    public EntityUid? Target;
 
     protected TCPAbilityEvent(EntityUid user, EntityUid? target)
     {
@@ -50,3 +50,16 @@ public sealed partial class TCPAscendedEvent : EntityEventArgs
 { }
 public sealed partial class TCPDescendedEvent : EntityEventArgs
 { }
+
+
+/// <summary>
+///     This ability fires before the actual ability activation event, allowing us to do things like 
+///     change the target before we finish the ability.
+/// </summary>
+public sealed partial class TCPAbilityModifyTargetEvent : TCPAbilityEvent
+{
+    public TCPAbilityModifyTargetEvent(EntityUid user,
+        EntityUid? target)
+        : base(user, target)
+    { }
+}

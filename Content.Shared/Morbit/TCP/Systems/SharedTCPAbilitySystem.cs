@@ -51,6 +51,7 @@ public abstract class SharedTCPAbilitySystem : EntitySystem
 
     private void OnShutdown(EntityUid uid, TCPAbilityComponent component, ComponentShutdown args)
     {
+        DeactivateTCPAbilityForAll(uid, component);
         UnloadAbilityTrigger(component);
         UnloadAbilityEffects(component);
     }
@@ -180,6 +181,13 @@ public abstract class SharedTCPAbilitySystem : EntitySystem
     {
         if (!Resolve(uid, ref component))
             return;
+
+        var retargetEvent = new TCPAbilityModifyTargetEvent(user, target);
+        foreach (var holder in component.AbilityHolders.ContainedEntities)
+            RaiseLocalEvent(holder, retargetEvent);
+
+        if (retargetEvent.Handled)
+            target = retargetEvent.Target;
 
         var abilityEvent = new TCPAbilityActivatedEvent(user, target, strength);
         foreach (var holder in component.AbilityHolders.ContainedEntities)
