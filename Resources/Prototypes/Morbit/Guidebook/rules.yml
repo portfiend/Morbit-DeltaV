@@ -1,0 +1,56 @@
+- type: guideEntry
+  id: MorbitRuleset
+  name: guide-entry-morbit-Rules
+  text: "/ServerInfo/Guidebook/Morbit/Rules/MorbitRuleset.xml"
+  priority: -2
+  ruleEntry: true
+  children:
+  - MorbitRule0
+  - MorbitRule1
+  - MorbitRule2
+  - MorbitRule3
+  - MorbitRule4
+  - MorbitRule5
+  - MorbitRule6
+
+- type: guideEntry
+  id: MorbitRule0
+  name: guide-entry-morbit-rule-0
+  text: "/ServerInfo/Guidebook/Morbit/Rules/CommunityRules/Rule0.xml"
+  ruleEntry: true
+
+- type: guideEntry
+  id: MorbitRule1
+  name: guide-entry-morbit-rule-1
+  text: "/ServerInfo/Guidebook/Morbit/Rules/CommunityRules/Rule1.xml"
+  ruleEntry: true
+
+- type: guideEntry
+  id: MorbitRule2
+  name: guide-entry-morbit-rule-2
+  text: "/ServerInfo/Guidebook/Morbit/Rules/CommunityRules/Rule2.xml"
+  ruleEntry: true
+
+- type: guideEntry
+  id: MorbitRule3
+  name: guide-entry-morbit-rule-3
+  text: "/ServerInfo/Guidebook/Morbit/Rules/CommunityRules/Rule3.xml"
+  ruleEntry: true
+
+- type: guideEntry
+  id: MorbitRule4
+  name: guide-entry-morbit-rule-4
+  text: "/ServerInfo/Guidebook/Morbit/Rules/CommunityRules/Rule4.xml"
+  ruleEntry: true
+
+- type: guideEntry
+  id: MorbitRule5
+  name: guide-entry-morbit-rule-5
+  text: "/ServerInfo/Guidebook/Morbit/Rules/CommunityRules/Rule5.xml"
+  ruleEntry: true
+
+- type: guideEntry
+  id: MorbitRule6
+  name: guide-entry-morbit-rule-6
+  text: "/ServerInfo/Guidebook/Morbit/Rules/CommunityRules/Rule6.xml"
+  ruleEntry: true
