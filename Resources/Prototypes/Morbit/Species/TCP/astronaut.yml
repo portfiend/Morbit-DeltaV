@@ -59,6 +59,10 @@
       points: 5
       required: false
       defaultMarkings: [ TCPHandsBasicTertiary ]
+    Tail:
+      points: 1
+      required: false
+      defaultMarkings: [ ]
 
 - type: humanoidBaseSprite
   id: MobTCPAstronautHead

@@ -48,6 +48,10 @@
       points: 1
       required: true
       defaultMarkings: [ TCPEarnubsBasic ]
+    Tail:
+      points: 1
+      required: false
+      defaultMarkings: [ ]
 
 - type: humanoidBaseSprite
   id: MobTCPHead

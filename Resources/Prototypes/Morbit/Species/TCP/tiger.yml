@@ -1,0 +1,50 @@
+- type: species
+  parent: TinyCatPerson
+  id: TCPTiger
+  masterSpecies: TinyCatPerson
+  name: species-name-tcp-tiger
+  roundStart: true
+  prototype: MobTCPTiger
+  sprites: MobTCPSprites
+  markingLimits: MobTCPTigerMarkingLimits
+  dollPrototype: MobTCPTigerDummy
+  subspeciesName: species-name-tcp-tiger
+
+- type: markingPoints
+  id: MobTCPTigerMarkingLimits
+  onlyWhitelisted: true
+  points:
+    Hair:
+      points: 0
+      required: false
+    FacialHair:
+      points: 0
+      required: false
+    Head:
+      points: 5
+      required: false
+      defaultMarkings: [ TCPHeadTigerNose, TCPHeadTigerStripes, TCPHeadTigerCheekFluff ]
+    HeadTop: # earnubs
+      points: 1
+      required: true
+      defaultMarkings: [ TCPEarnubsBasicWithTipTertiary ]
+    Chest:
+      points: 5
+      required: false
+      defaultMarkings: [ TCPChestTigerStripesTorso, TCPChestTigerTorsoCountershade, TCPChestTigerNeckFluff ]
+    Arms:
+      points: 5
+      required: false
+      defaultMarkings: [ TCPArmsTigerStripes, TCPHandsBasicSecondary ]
+    Legs:
+      points: 5
+      required: false
+      defaultMarkings: [ TCPLegsTigerStripes, TCPFeetBasicSecondary ]
+    Overlay:
+      points: 100
+      required: false
+      defaultMarkings: [ TCPEyespotsClosed ]
+    Tail:
+      points: 1
+      required: false
+      defaultMarkings: [ TCPTailTigerStriped ]

@@ -1,0 +1,30 @@
+- type: entity
+  save: false
+  name: Urist McTCP
+  id: BaseMobTCPTigerAppearance
+  abstract: true
+  components:
+  - type: HumanoidAppearance
+    species: TinyCatPerson
+
+- type: entity
+  save: false
+  name: Urist McTigerType
+  parent:
+  - BaseMobTCP
+  - MobTCPBaseHealthFantastic
+  - BaseMobTCPTigerAppearance
+  id: BaseMobTCPTiger
+  abstract: true
+  components:
+  - type: Icon
+    sprite: Morbit/Mobs/Species/TCP/Typings/Tiger/parts.rsi
+    state: full
+  # TODO: TCP ability
+
+- type: entity
+  parent: 
+  - MobTCPDummy
+  - BaseMobTCPTigerAppearance
+  id: MobTCPTigerDummy
+  noSpawn: True

@@ -44,3 +44,7 @@
       points: 100
       required: false
       defaultMarkings: [ TCPEyespotsGoogly ]
+    Tail:
+      points: 1
+      required: false
+      defaultMarkings: [ ]
