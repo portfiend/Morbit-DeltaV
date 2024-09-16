@@ -2,7 +2,7 @@
   abstract: true
   parent: TCPMarkingBase
   id: TCPEyespotBase
-  bodyPart: HeadTop
+  bodyPart: HeadSide
   markingCategory: Overlay
 
 - type: marking

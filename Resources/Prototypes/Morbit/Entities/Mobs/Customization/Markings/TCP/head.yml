@@ -2,7 +2,7 @@
   abstract: true
   parent: TCPMarkingBase
   id: TCPHeadBase
-  bodyPart: HeadSide
+  bodyPart: Head
   markingCategory: Head
 
 # Astronaut
@@ -21,6 +21,7 @@
 - type: marking
   parent: TCPHeadBase
   id: TCPHeadAstronautHelmet
+  bodyPart: HeadTop
   coloring:
     default:
       type:
