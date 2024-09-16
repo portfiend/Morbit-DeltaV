@@ -1,0 +1,34 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-4.0",
+    "copyright": "portfiend, species concept by Homebrew Deviants",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "full"
+        },
+        {
+            "name": "head",
+            "directions": 4
+        },
+        {
+            "name": "l_foot",
+            "directions": 4
+        },
+        {
+            "name": "l_leg",
+            "directions": 4
+        },
+        {
+            "name": "r_foot",
+            "directions": 4
+        },
+        {
+            "name": "r_leg",
+            "directions": 4
+        }
+    ]
+}
