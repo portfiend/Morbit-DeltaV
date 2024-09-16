@@ -5,6 +5,33 @@
   bodyPart: RLeg
   markingCategory: Legs
 
+- type: marking
+  parent: TCPLegsBase
+  id: TCPFeetBasic
+  bodyPart: RFoot
+  sprites:
+  - sprite: Morbit/Mobs/Species/TCP/parts.rsi
+    state: l_foot
+  - sprite: Morbit/Mobs/Species/TCP/parts.rsi
+    state: r_foot
+
+- type: marking
+  parent: TCPFeetBasic
+  id: TCPFeetBasicSecondary
+  coloring:
+    default:
+      type:
+        !type:SecondaryColoring
+
+- type: marking
+  parent: TCPFeetBasic
+  id: TCPFeetBasicTertiary
+  coloring:
+    default:
+      type:
+        !type:TertiaryColoring
+
+
 # Astronaut
 
 - type: marking
@@ -45,3 +72,19 @@
   sprites:
   - sprite: Morbit/Mobs/Species/TCP/parts.rsi
     state: r_foot
+
+# Tiger
+
+- type: marking
+  parent: TCPLegsBase
+  id: TCPLegsTigerStripes
+  bodyPart: LLeg
+  coloring:
+    default:
+      type:
+        !type:TertiaryColoring
+  sprites:
+  - sprite: Morbit/Mobs/Customization/TCP/Typings/tiger.rsi
+    state: stripe_l_leg
+  - sprite: Morbit/Mobs/Customization/TCP/Typings/tiger.rsi
+    state: stripe_r_leg

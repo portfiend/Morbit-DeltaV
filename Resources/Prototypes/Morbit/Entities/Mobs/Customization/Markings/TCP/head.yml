@@ -42,3 +42,38 @@
   sprites:
   - sprite: Morbit/Mobs/Customization/TCP/Typings/collision.rsi
     state: head
+
+# Tiger
+
+- type: marking
+  parent: TCPHeadBase
+  id: TCPHeadTigerCheekFluff
+  coloring:
+    default:
+      type:
+        !type:SecondaryColoring
+  sprites:
+  - sprite: Morbit/Mobs/Customization/TCP/Typings/tiger.rsi
+    state: cheek_fluff
+
+- type: marking
+  parent: TCPHeadBase
+  id: TCPHeadTigerStripes
+  coloring:
+    default:
+      type:
+        !type:TertiaryColoring
+  sprites:
+  - sprite: Morbit/Mobs/Customization/TCP/Typings/tiger.rsi
+    state: stripe_head
+
+- type: marking
+  parent: TCPHeadBase
+  id: TCPHeadTigerNose
+  coloring:
+    default:
+      type:
+        !type:TattooColoring
+  sprites:
+  - sprite: Morbit/Mobs/Customization/TCP/Typings/tiger.rsi
+    state: nose

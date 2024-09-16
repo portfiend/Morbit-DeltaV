@@ -55,3 +55,19 @@
   sprites:
   - sprite: Morbit/Mobs/Species/TCP/parts.rsi
     state: r_hand
+
+# Tiger
+
+- type: marking
+  parent: TCPArmsBase
+  id: TCPArmsTigerStripes
+  bodyPart: LArm
+  coloring:
+    default:
+      type:
+        !type:TertiaryColoring
+  sprites:
+  - sprite: Morbit/Mobs/Customization/TCP/Typings/tiger.rsi
+    state: stripe_l_arm
+  - sprite: Morbit/Mobs/Customization/TCP/Typings/tiger.rsi
+    state: stripe_r_arm

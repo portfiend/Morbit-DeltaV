@@ -25,3 +25,31 @@
     state: basic
   - sprite: Morbit/Mobs/Customization/TCP/earnubs.rsi
     state: basic_right
+
+- type: marking
+  parent: TCPEarnubsBase
+  id: TCPEarnubsBasicWithTip
+  coloring:
+    layers:
+      basic_tip:
+        type:
+          !type:SecondaryColoring
+  sprites:
+  - sprite: Morbit/Mobs/Customization/TCP/earnubs.rsi
+    state: basic
+  - sprite: Morbit/Mobs/Customization/TCP/earnubs.rsi
+    state: basic_tip
+
+- type: marking
+  parent: TCPEarnubsBase
+  id: TCPEarnubsBasicWithTipTertiary
+  coloring:
+    layers:
+      basic_tip:
+        type:
+          !type:TertiaryColoring
+  sprites:
+  - sprite: Morbit/Mobs/Customization/TCP/earnubs.rsi
+    state: basic
+  - sprite: Morbit/Mobs/Customization/TCP/earnubs.rsi
+    state: basic_tip

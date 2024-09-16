@@ -21,3 +21,14 @@
     state: googly_base
   - sprite: Morbit/Mobs/Customization/TCP/eyespots.rsi
     state: googly_dots
+
+- type: marking
+  parent: TCPEyespotBase
+  id: TCPEyespotsClosed
+  coloring:
+    default:
+      type:
+        !type:EyeColoring
+  sprites:
+  - sprite: Morbit/Mobs/Customization/TCP/eyespots.rsi
+    state: closed

@@ -51,3 +51,38 @@
   sprites:
   - sprite: Morbit/Mobs/Customization/TCP/Typings/collision.rsi
     state: torso
+
+# Tiger
+
+- type: marking
+  parent: TCPChestBase
+  id: TCPChestTigerNeckFluff
+  coloring:
+    default:
+      type:
+        !type:SecondaryColoring
+  sprites:
+  - sprite: Morbit/Mobs/Customization/TCP/Typings/tiger.rsi
+    state: neck_fluff
+
+- type: marking
+  parent: TCPChestBase
+  id: TCPChestTigerTorsoCountershade
+  coloring:
+    default:
+      type:
+        !type:SecondaryColoring
+  sprites:
+  - sprite: Morbit/Mobs/Customization/TCP/Typings/tiger.rsi
+    state: torso_counter
+
+- type: marking
+  parent: TCPChestBase
+  id: TCPChestTigerStripesTorso
+  coloring:
+    default:
+      type:
+        !type:TertiaryColoring
+  sprites:
+  - sprite: Morbit/Mobs/Customization/TCP/Typings/tiger.rsi
+    state: stripe_torso
