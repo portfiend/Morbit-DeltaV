@@ -1,0 +1,7 @@
+- type: tcpAbility
+  id: Collision
+  components:
+    Default:
+    - type: CreateEntityAbility
+      prototype: Wrench
+      pickupOnSpawn: true

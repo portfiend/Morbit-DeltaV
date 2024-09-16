@@ -21,6 +21,9 @@
     sprite: Morbit/Mobs/Species/TCP/Typings/Collision/parts.rsi
     state: full
   - type: TCPAbility
+    abilityTrigger: ActiveAscension
+    abilities:
+    - Collision
 
 - type: entity
   parent: 
