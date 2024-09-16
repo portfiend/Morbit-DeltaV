@@ -14,6 +14,10 @@
         {
             "name": "basic_right",
             "directions": 4
+        },
+        {
+            "name": "basic_tip",
+            "directions": 4
         }
     ]
 }

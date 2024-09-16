@@ -1,0 +1,63 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-4.0",
+    "copyright": "skinstealer, edited by portfiend, species concept by Homebrew Deviants",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "cheek_fluff",
+            "directions": 4
+        },
+        {
+            "name": "neck_fluff",
+            "directions": 4
+        },
+        {
+            "name": "nose",
+            "directions": 4
+        },
+        {
+            "name": "stripe_head",
+            "directions": 4
+        },
+        {
+            "name": "stripe_l_arm",
+            "directions": 4
+        },
+        {
+            "name": "stripe_l_leg",
+            "directions": 4
+        },
+        {
+            "name": "stripe_r_arm",
+            "directions": 4
+        },
+        {
+            "name": "stripe_r_leg",
+            "directions": 4
+        },
+        {
+            "name": "stripe_torso",
+            "directions": 4
+        },
+        {
+            "name": "tail_stripe",
+            "directions": 4
+        },
+        {
+            "name": "tail_tip",
+            "directions": 4
+        },
+        {
+            "name": "tail",
+            "directions": 4
+        },
+        {
+            "name": "torso_counter",
+            "directions": 4
+        }
+    ]
+}

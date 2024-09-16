@@ -14,6 +14,10 @@
         {
             "name": "googly_dots",
             "directions": 4
+        },
+        {
+            "name": "closed",
+            "directions": 4
         }
     ]
 }
